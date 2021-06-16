@@ -114,8 +114,7 @@ public class Employee {
 	public void setOfficeCode(Office officeCode) {
 		this.officeCode = officeCode;
 	}
-return the reportsTo
-	 */
+
 	public Employee getReportsTo() {
 		return reportsTo;
 	}
