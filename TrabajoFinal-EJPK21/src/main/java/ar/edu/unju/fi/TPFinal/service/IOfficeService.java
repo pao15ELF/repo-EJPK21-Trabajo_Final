@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.TPFinal.service;
 
 
+import java.util.List;
+
 import ar.edu.unju.fi.TPFinal.model.Office;
 
 public interface IOfficeService {
@@ -9,5 +11,7 @@ public interface IOfficeService {
 	
 	public Office buscarOfficePorId(String id);
 	
+	public List<Office> obtenerListaOffices();
 	
+	public void eliminarOffice(String officeId);
 }

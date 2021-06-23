@@ -12,4 +12,8 @@ public interface IEmployeeService {
 	public Employee buscarEmployeePorId(Integer id);
 	
 	public List<Employee> listaEmployeesPorOffice(Office office);
+
+	public void eliminarEmployee(Integer employeeNumber);
+	
+	public List<Employee> listaemployees();
 }

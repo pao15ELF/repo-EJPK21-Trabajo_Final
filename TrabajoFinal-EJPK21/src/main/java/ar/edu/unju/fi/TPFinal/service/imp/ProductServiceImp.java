@@ -24,7 +24,13 @@ public class ProductServiceImp implements IProductService {
 
 	@Override
 	public Product buscarProductPorId(String id) {
-		Product producto = productRepository.findById(id).get();
+		Product producto=null;
+		try {
+			producto = productRepository.findById(id).get();
+		}catch(Exception e) {
+			e.getCause();
+		}
+		
 		return producto;
 	}
 
@@ -34,4 +40,15 @@ public class ProductServiceImp implements IProductService {
 		return lista;
 	}
 	
+	@Override
+	public void eliminarProduct(Product product) {
+		productRepository.delete(product);
+		
+	}
+
+	@Override
+	public List<Product> obtenerListaProducts() {
+		List<Product> lista = (List<Product>) productRepository.findAll();
+		return lista;
+	}
 }
