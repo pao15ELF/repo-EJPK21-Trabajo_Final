@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Orders Detail</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-md-10">
+				<h3 class="text-center">Listado Orders Detail</h3>
+				<hr>
+				<div class="text-center">
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+
+									<th>Order Number</th>
+									<th>Product Code</th>
+									<th>Quantity Ordered</th>
+									<th>Price Each</th>
+									<th>Order Line Number</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="od :${orderDetail}">
+
+									<td th:text="${od.orderDetailId.orderNumber.orderNumber}"></td>
+									<td th:text="${od.orderDetailId.productCode.productCode}"></td>
+									<td th:text="${od.quantityOrdered}"></td>
+									<td th:text="${od.priceEach}"></td>
+									<td th:text="${od.orderLineNumber}"></td>
+									<td><a th:href="@{/orderDetail/editar/}+${od.orderDetailId.orderNumber.orderNumber}+'/'${od.orderDetailId.productCode.productCode}"
+										class="btn btn-warning">EDITAR</a> <br> <br> <a
+										th:href="@{/orderDetail/eliminar/}+${od.orderDetailId.orderNumber.orderNumber}+'/'${od.orderDetailId.productCode.productCode}"
+										class="btn btn-danger">ELIMINAR</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
+		</div>
+	</div>
+	<footer th:replace="/layouts/footer :: footer"> </footer>
+	<script type="text/javascript"
+		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+</body>
+</html>

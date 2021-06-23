@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Formulario Nueva Order Detail</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<!-- Container -->
+	<div class="container">
+
+		<div class="row col-sm-12 col-md">
+			<div class="col-sm-10 col-md">
+				<!-- Formulario -->
+
+				<h1 class="text-center">Cargar Detalles de un pedido</h1>
+				<hr>
+				<form action="/orderDetail/cargar/siguiente" th:object="${orderDetail}" method="post">
+
+
+					<!-- Customer Number no iria-->
+					<!-- <div class="form-group ">
+						<label>Order Number</label> <select
+							th:field="*{orderDetailId.orderNumber.orderNumber}"
+							class="form-control">
+							<option th:each="od : ${orderDetail}"
+								th:value="${od.orderDetailId.orderNumber.orderNumber}"
+								th:text="${od.orderDetailId.orderNumber.orderNumber}"
+								th:selected="false"></option>
+						</select>
+					</div> -->
+					<!-- Fin Customer Number -->
+						
+					<!-- EmployeeNumber
+					orderDetailId.productCode.productCode
+					od.orderDetailId.productCode.productCode
+					-->
+					<div class="form-group ">
+						<label>Producto</label> 
+						<select th:field="*{orderDetailId.productCode}" class="form-control">
+							<option th:each="p : ${products}"
+								th:value="${p.productCode}"
+								th:text="${p.productName}"
+								th:selected="false"></option>
+						</select>
+					</div>
+					
+					<!-- Fin EmployeeNumber -->
+
+					<!-- Quantity Ordered -->
+					<div class="form-group">
+						<label for="quantityOrdered">Cantidad</label> <input
+							type="number" class="form-control" id="quantityOrdered"
+							th:field="*{quantityOrdered}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('quantityOrdered')}"
+						th:errors="*{quantityOrdered}"></div>
+
+					<!-- Fin Quantity Ordered -->
+
+					<!-- Price Each -->
+					<div class="form-group">
+						<label for="priceEach">Precio por Unidad</label> <input type="number"
+							class="form-control" id="priceEach" th:field="*{priceEach}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('priceEach')}" th:errors="*{priceEach}"></div>
+					<!-- Fin Price Each-->
+
+					<!-- Order Line Number-->
+					<div class="form-group">
+						<label for="orderLineNumber">Numero de linea de pedido</label> <input
+							type="number" class="form-control" id="orderLineNumber"
+							th:field="*{orderLineNumber}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('orderLineNumber')}"
+						th:errors="*{orderLineNumber}"></div>
+
+					<!-- Order Line Number -->
+
+
+					<br> <br>
+					<button type="submit" class="btn btn-primary">Siguiente</button>
+					
+				</form>
+				<br>
+				<br>
+				<div>
+					<a href="/order/nuevo">Terminar</a>
+					
+				</div>
+			</div>
+
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
+
+		</div>
+
+	</div>
+	<!-- Fin Container -->
+	<footer th:replace="/layouts/footer :: footer"> </footer>
+	<script type="text/javascript"
+		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+</body>
+</html>

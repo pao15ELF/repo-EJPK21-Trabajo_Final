@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Formulario Nuevo Cliente</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<!-- Container -->
+	<div class="container">
+
+		<div class="row col-sm-12 col-md">
+			<div class="col-sm-10 col-md">
+				<!-- Formulario -->
+
+				<h1 class="text-center">Cargar de datos del cliente (Empresa)</h1>
+				<hr>
+				<form action="/customer/guardar" th:object="${customer}" method="post">
+					<!-- Id del cliente oculto -->
+					<input type="hidden" th:field="*{customerNumber}" />
+
+					<!-- Nombre y apellido -->
+					<div class="form-group">
+						<label for="customerName">Nombre</label> 
+						<input type="text" class="form-control" id="customerName" th:field="*{customerName}"
+							placeholder="Ingrese nombre del cliente ó Empresa">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('customerName')}"
+						th:errors="*{customerName}"></div>
+
+					<!--  Customer Last Name -->
+					<div class="form-group">
+						<label for="contactLastName">Apellido del Contratador</label> <input
+							type="text" class="form-control" id="contactLastName"
+							th:field="*{contactLastName}" placeholder="Ingrese Apellido">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('contactLastName')}"
+						th:errors="*{contactLastName}"></div>
+
+					<!--  Customer First Name -->
+					<div class="form-group">
+						<label for="contactFirstName">Nombre del Contratador</label> <input
+							type="text" class="form-control" id="contactFirstName"
+							th:field="*{contactFirstName}" placeholder="Ingrese Nombre/s">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('contactFirstName')}"
+						th:errors="*{contactFirstName}"></div>
+
+					<!-- Fin nombre y apellido -->
+
+					<!-- Phone -->
+					<div class="form-group">
+						<label for="phone">Telefono</label>
+					    <input type="number" class="form-control" id="phone" th:field="*{phone}"
+							placeholder="Ingrese n° de telefono">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+
+					<!-- Fin Phone -->
+
+					<!-- Address Line  -->
+					<div class="form-group">
+						<label for="addressLine1">Direccion 1</label> <input type="text"
+							class="form-control" id="addressLine1" th:field="*{addressLine1}"
+							placeholder="Ingrese dirección">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('addressLine1')}"
+						th:errors="*{addressLine1}"></div>
+
+
+					<div class="form-group">
+						<label for="addressLine2">Direccion 2</label> <input
+							type="text" class="form-control" id="addressLine2"
+							th:field="*{addressLine2}"
+							placeholder="Ingrese otra dirección.">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('addressLine2')}"
+						th:errors="*{addressLine2}"></div>
+
+					<!-- Fin Address Line -->
+
+					<!-- City -->
+					<div class="form-group">
+						<label for="city">Ciudad</label> 
+						<input type="text" class="form-control" id="city" th:field="*{city}"
+							placeholder="Ingrese ciudad">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+
+					<!-- Fin City -->
+
+					<!-- State -->
+					<div class="form-group">
+						<label for="state">Provincia</label> <input type="text"
+							class="form-control" id="state" th:field="*{state}"
+							placeholder="Ingrese provincia.">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+
+					<!-- Fin State -->
+
+					<!-- Postal Code -->
+					<div class="form-group">
+						<label for="postalCode">Codigo Postal</label> 
+						<input type="number" class="form-control" id="postalCode" th:field="*{postalCode}"
+							placeholder="Ingrese código postal.">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('postalCode')}"
+						th:errors="*{postalCode}"></div>
+
+					<!-- Fin Postal Code -->
+
+					<!-- Country -->
+					<div class="form-group">
+						<label for="country">Pais</label> <input type="text" class="form-control" id="country" th:field="*{country}"
+							placeholder="Ingrese el Pais">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
+
+					<!-- Fin Country -->
+
+					<!-- salesRepEmployeeNumber-->
+					<div class="form-group ">
+						<label>Numero de Employee</label> <select
+							th:field="*{salesRepEmployeeNumber}"
+							class="form-control">
+							<option th:each="employ : ${employees}"
+								th:value="${employ.employeeNumber}"
+								th:text="${employ.jobTitle}+ ' - ' + ${employ.lastName} + ' ' + ${employ.firstName}"
+								th:selected="false"></option>
+
+						</select>
+					</div>
+					<!-- Fin salesRepEmployeeNumber -->
+					<!-- Credit Limit -->
+					<div class="form-group">
+						<label for="creditLimit">Limite de Credito</label> <input type="number"
+							class="form-control" id="creditLimit" th:field="*{creditLimit}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('creditLimit')}" th:errors="*{creditLimit}"></div>
+
+					<!-- Fin CreditLimit -->
+
+					<br> <br>
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</form>
+
+			</div>
+
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
+
+		</div>
+
+	</div>
+	<!-- Fin Container -->
+	<footer th:replace="/layouts/footer :: footer"> </footer>
+	<script type="text/javascript"
+		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+</body>
+</html>

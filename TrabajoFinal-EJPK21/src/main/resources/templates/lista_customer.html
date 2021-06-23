@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Customers</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-md-10">
+				<h3 class="text-center"> Listado de Clientes</h3>
+				<hr>
+				<div class="text-center">
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-dark"> 
+								<tr> 
+									<th> ID</th>
+									<th> Nombre Completo</th>
+									<th> Apellido (Preg)</th>
+									<th> Nombre (Preg)</th>
+									<th> Telefono </th>
+									<th> Direccion 1</th>
+									<th> Direccion 2</th>
+									<th> Ciudad</th>
+									<th> Provincia</th>
+									<th> Codigo Postal</th>
+									<th> Pais</th>
+									<th> Empleado que lo atendió</th>
+									<th> Limite de credito</th>
+									<th> Acciones </th>
+				 				</tr>
+							</thead>
+							<tbody>
+								<tr th:each="c:${customers}">
+								
+									<td th:text="${c.customerNumber}"> </td>
+									<td th:text="${c.customerName}"> </td>
+									<td th:text="${c.contactLastName}"> </td>
+									<td th:text="${c.contactFirstName}"> </td>
+									<td th:text="${c.phone}"> </td>
+									<td th:text="${c.addressLine1}"> </td>
+									<td th:text="${c.addressLine2}"> </td>
+									<td th:text="${c.city}"> </td>
+									<td th:text="${c.state}"> </td>
+									<td th:text="${c.postalCode}"> </td>
+									<td th:text="${c.country}"> </td>
+									<td th:if="${c.salesRepEmployeeNumber==null}"> </td>
+									
+									<td th:if="${c.salesRepEmployeeNumber!=null}" th:text="${c.salesRepEmployeeNumber.lastName}+' '+${c.salesRepEmployeeNumber.firstName}"> </td>
+									
+									<td th:text="${c.creditLimit}"> </td>
+							
+									<td> 
+										<a th:href="@{/customer/modificar/}+${c.customerNumber}" class= "btn btn-warning" >EDITAR</a>		
+										<br><br>
+										<a th:href="@{/customer/eliminar/}+${c.customerNumber}" class= "btn btn-danger" >ELIMINAR</a>
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>	
+				</div>	
+			</section>
+			 <aside th:replace="/layouts/publicidad :: aside"> </aside>
+		</div>
+	</div>
+		<footer th:replace="/layouts/footer :: footer"> </footer>
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+</body>
+</html>
