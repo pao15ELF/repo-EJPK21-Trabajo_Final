@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Formulario Nuevo Payment</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<!-- Container -->
+	<div class="container">
+
+		<div class="row col-sm-12 col-md">
+			<div class="col-sm-10 col-md">
+				<!-- Formulario -->
+
+				<h1 class="text-center">Nuevo pago</h1>
+				<hr>
+				<form action="/payment/guardar" th:object="${payment}" method="post">
+
+					<!-- Check Number -->
+					<div class="form-group">
+						<label for="checkNumber">Numero de Check </label> <input type="number"
+							class="form-control" id="checkNumber" th:field="*{paymentId.checkNumber}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('paymentId.checkNumber')}" th:errors="*{paymentId.checkNumber}"></div>
+
+					<!-- Fin Check Number -->
+
+					<!-- Payment Date-->
+					<div class="form-group">
+						<label for="paymentDate">Payment Date</label> 
+						<input type="date" class="form-control" id="paymentDate" th:field="*{paymentDate}">
+					</div>
+					<div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"></div>
+
+					<!-- Fin Payment Date -->
+					
+					<!-- Amount-->
+					<div class="form-group">
+						<label for="amount">Total a pagar</label> 
+						<input type="number" class="form-control" id="amount" th:text="${total}">
+					</div>
+					
+					<!--  <div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div> -->
+
+					<!-- Fin Check Number -->
+
+					<!-- customer-->
+					<div class="form-group ">
+						<label>Cliente</label> 
+						<!-- <select th:field="*{paymentId.customersNumber.customerNumber}"
+							class="form-control">
+							<option th:each="c : ${customer}"
+								th:value="${c.customerNumber}"
+								th:text="${c.customerNumber} + ' - ' + ${c.customerName} "
+								th:selected="false"></option>
+
+						</select> -->
+						<h1 type="text" class="form-control" th:text="${customer.customerName}"></h1>
+					</div>
+					<!-- Fin customer -->
+
+					<br> <br>
+					<button type="submit" class="btn btn-primary">Pagar</button>
+				</form>
+				
+
+			</div>
+
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
+
+		</div>
+
+	</div>
+	<!-- Fin Container -->
+	<footer th:replace="/layouts/footer :: footer"> </footer>
+	<script type="text/javascript"
+		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+</body>
+</html>
