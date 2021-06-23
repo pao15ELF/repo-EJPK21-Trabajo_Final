@@ -34,5 +34,15 @@ public class EmployeeServiceImp implements IEmployeeService {
 		return lista;
 	}
 
-	
+	@Override
+	public void eliminarEmployee(Integer employeeNumber) {
+		employeeRepository.deleteById(employeeNumber);
+		
+	}
+
+	@Override
+	public List<Employee> listaemployees() {
+		List<Employee> lista = (List<Employee>) employeeRepository.findAll();
+		return lista;
+	}
 }
