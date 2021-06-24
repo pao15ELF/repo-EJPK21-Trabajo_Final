@@ -12,11 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "CUSTOMERS")
+@Component
 public class Customer {
 	
 	@Id
@@ -24,45 +29,52 @@ public class Customer {
 	@Column(name = "customerNumber")
 	private Integer customerNumber;
 	
-	@Column(name = "customersName")
+	@NotEmpty(message="Debe ingresar el nombre del cliente")
+	@Column(name = "customersName", length=50, nullable= false)
 	private String customerName; //tamaño 50
 	
-	@Column(name = "contactLastName")
+	@NotEmpty(message="Debe ingresar el apellido del contacto")
+	@Column(name = "contactLastName" , length=50, nullable=false)
 	private String contactLastName; // tamaño 50
 	
-	@Column(name = "contactFirstName")
+	@NotEmpty(message="Debe ingresar el nombre del contacto")
+	@Column(name = "contactFirstName", length=50 , nullable=false)
 	private String contactFirstName; // tamaño 50
 	
-	@Column(name = "phone")
+	@NotEmpty(message="Debe ingresar el número de telefono del cliente")
+	@Column(name = "phone", length=50, nullable =false)
 	private String phone; //tamaño 50
 	
-	@Column(name = "addressLine1")
+	@NotEmpty(message="Debe ingresar la dirección del cliente")
+	@Column(name = "addressLine1", length=50 , nullable=false)
 	private String addressLine1; // tamaño 50
 	
-	@Column(name = "addressLine2")
+	@Column(name = "addressLine2", length=50, nullable=true)
 	private String addressLine2; // tamaño 50
 	
-	@Column(name = "city")
+	@NotEmpty(message="Debe ingresar la cuidad del cliente ")
+	@Column(name = "city", length=50, nullable=false)
 	private String city; //tamaño 50
 	
-	@Column(name = "state")
+	@Column(name = "state", length=50, nullable=true)
 	private String state; // tamaño 50
 	
-	@Column(name = "postalCode")
+	@Column(name = "postalCode", length=15, nullable=true)
 	private String postalCode; //tamaño 15
 	
-	@Column(name = "country")
+	@NotEmpty(message="Debe ingresar el pais del cliente")
+	@Column(name = "country", length=50, nullable=false)
 	private String country; //tamaño 50
 	
+	@Valid
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "salesRepEmployeeNumber")
 	private Employee salesRepEmployeeNumber;
 	
+	@Min(value=0 , message="El limite de credito debe ser mayor o igual a 0")
 	@Column(name = "creditLimit")
 	private double creditLimit;
 	
-	@OneToOne(mappedBy = "paymentId.customersNumber",fetch = FetchType.LAZY)
-	private Payment payment;
 	
 	@OneToMany(mappedBy = "customerNumber",fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
@@ -401,24 +413,6 @@ public class Customer {
 	 */
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
-	}
-
-
-
-	/**
-	 * @return the payment
-	 */
-	public Payment getPayment() {
-		return payment;
-	}
-
-
-
-	/**
-	 * @param payment the payment to set
-	 */
-	public void setPayment(Payment payment) {
-		this.payment = payment;
 	}
 
 

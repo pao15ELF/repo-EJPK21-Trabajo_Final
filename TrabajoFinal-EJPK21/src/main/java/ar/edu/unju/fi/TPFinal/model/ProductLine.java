@@ -11,18 +11,26 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.stereotype.Component;
 @Entity
 @Table(name="PRODUCTLINES")
+@Component
 public class ProductLine {
 	
 	@Id
+	@NotNull(message = "La linea de producto no puede ser nulo")
 	@Column(name = "productline")
 	private String productLine; //tamaño 50
 	
-	@Column(name = "textDescription")
+	@Size(max = 4000, message="La descripcion se pasa de los 4000 caracteres permitidos.")
+	@Column(name = "textDescription", length=4000, nullable=true)
 	private String textDescription; // tamaño 4000 
 	
-	@Column(name = "htmlDescription")
+	@Size(max = 200, message="La direccion se pasa de los 200 caracteres permitidos.")
+	@Column(name = "htmlDescription", length=200, nullable=true)
 	private String htmlDescription; //Preguntar con respecto a MEDIUMTEXT
 	
 	@Column(name = "image")

@@ -4,22 +4,31 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="ORDERDETAILS")
+@Component
 public class OrderDetail {
 
 
 	@EmbeddedId
+	@Autowired
 	private OrderDetailId orderDetailId;
 	
-	@Column(name = "quantityOrdered")
+	@Min(value=1, message="La cantidad minima a ordenar debe ser mayor o igual a 1")
+	@Column(name = "quantityOrdered", nullable=false)
 	private int quantityOrdered;
 	
-	@Column(name = "priceEach")
+	@Min(value=0, message="El precio unitario del producto deber ser mayor 0 ")
+	@Column(name = "priceEach", nullable=false)
 	private double priceEach; 
 	
-	@Column(name = "orderLineNumber")
+	@Min(value=0, message="El número de linea de orden debe ser mayor a 0")
+	@Column(name = "orderLineNumber", nullable=false)
 	private short orderLineNumber;
 	
 	
@@ -110,7 +119,7 @@ public class OrderDetail {
 
 	@Override
 	public String toString() {
-		return "OrderDetail [orderDetailId=" + orderDetailId + ", quantityOrdered=" + quantityOrdered + ", priceEach="
+		return "OrderDetail [ quantityOrdered=" + quantityOrdered + ", priceEach="
 				+ priceEach + ", orderLineNumber=" + orderLineNumber + "]";
 	}
 	

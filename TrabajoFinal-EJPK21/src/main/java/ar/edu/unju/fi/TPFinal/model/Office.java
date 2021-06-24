@@ -8,37 +8,49 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "OFFICES")
+@Component
 public class Office {
 
 	@Id
+	@NotNull(message = "Debe ingresar un codigo de officina")
 	@Column(name = "officeCode")
 	private String officeCode; //10
 	
-	@Column(name = "city")
+	@NotEmpty(message="Debe ingresar la cuidad de la oficina")
+	@Column(name = "city", length=50, nullable=false)
 	private String city; // 50
 	
-	@Column(name = "phone")
+	@NotEmpty(message="Debe ingresar el telefono de la oficina")
+	@Column(name = "phone", length=50, nullable=false)
 	private String phone; //50
 	
-	@Column(name = "addressLine1")
+	@NotEmpty(message="Debe ingresar la direccion de la oficina")
+	@Column(name = "addressLine1", length=50, nullable=false)
 	private String addressLine1; //50
 	
-	@Column(name = "addressLine2")
+	@Column(name = "addressLine2", length=50, nullable=true)
 	private String addressLine2; //50
 	
-	@Column(name = "state")
+	@Column(name = "state", length=50, nullable=true)
 	private String state; //50
 	
-	@Column(name = "country")
+	@NotEmpty(message="Debe ingresar el pais de la oficina")
+	@Column(name = "country", length=50, nullable=false)
 	private String country; // 50
 	
-	@Column(name = "postalCode")
+	@NotEmpty(message="Debe ingresar el codigo postal de la oficina")
+	@Column(name = "postalCode", length=15, nullable=false)
 	private String postalCode; //15
 	
-	@Column(name = "territory")
+	@NotEmpty(message="Debe ingresar el territorio")
+	@Column(name = "territory", length=10, nullable=false)
 	private String territory; //10
 	
 	@OneToMany(mappedBy = "officeCode")
