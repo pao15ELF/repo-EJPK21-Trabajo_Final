@@ -74,12 +74,13 @@ public class OrderController {
 	@PostMapping("/orderDetail/cargar/siguiente")
 	public ModelAndView guardarOrderPage(@Valid @ModelAttribute("orderDetail")OrderDetail unOrderDetail, BindingResult resultadoValidacion) {
 		ModelAndView mav = new ModelAndView("nuevo_orderDetail");
+		orderDetails.add(unOrderDetail);
 		if (resultadoValidacion.hasErrors()) {
 			mav.addObject("orderDetail", unOrderDetail);
 			mav.addObject("products", productService.obtenerListaProducts());
 			
 		}else {
-			orderDetails.add(unOrderDetail);
+			
 			LOGGER.info("cantidad ordeerdatil"+unOrderDetail.getOrderDetailId().getProductCode());
 			mav.addObject("orderDetail", orderDetail);
 			mav.addObject("products", productService.obtenerListaProducts());	
