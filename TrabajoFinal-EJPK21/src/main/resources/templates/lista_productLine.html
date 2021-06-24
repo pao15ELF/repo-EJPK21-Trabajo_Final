@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Lista ProductoLine</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
+      <h3>Lineas de Productos</h3>
+      <hr>
+    </main>
+	<div class="container-fluid">
+		<div class="row">
+		    <section class="col-md-10">
+		      <div class="text-center">
+		        <div class="table-responsive">
+		        	<table class="table">
+					  <thead class="thead-dark">
+					    <tr class="text-white">
+					      <th >Linea de Producto </th>
+					      <th >Descripción</th>
+					      <th >Html Direccion</th>
+					      <th >Imagen</th>
+					      <th >Acciones </th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="p: ${productLines}" >
+							<td th:text="${p.productLine}"></td>
+							<td th:text="${p.textDescription}"></td>
+							<td th:text="${p.htmlDescription}"></td>
+							<td th:text="${p.image}"></td>
+							<td> 
+								<a th:href="@{/productLine/modificar/}+${p.productLine}" class="btn btn-success">Editar</a>
+								<!--  <a th:href="@{/product/productLine/delete/}+${p.productLine}" class="btn btn-danger">Delete</a> -->
+							 </td>
+						</tr>
+					  </tbody>
+					</table>
+		        </div>
+		      </div>
+	        </section>
+	        <aside th:replace="/layouts/publicidad :: aside"> </aside>
+	        
+        </div>
+
+      </div>
+      <footer th:replace="/layouts/footer :: footer"> </footer>
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script> 
+		
+	
+	</body>
+</html>

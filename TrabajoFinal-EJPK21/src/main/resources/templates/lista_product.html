@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Lista Producto</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
+      <h3>Lista de productos</h3>
+       </main>
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-md-10">
+		
+      
+      <div class="text-center">
+        <div class="table-responsive">
+        	<table class="table">
+			  <thead class="thead-dark">
+				    <tr class="text-white">
+				      <th>Codigo del Producto</th>
+				      <th>Producto</th>
+				      <th>Marca</th>
+				     
+				      <th>Escala</th>
+				      <th >Vendedor</th>
+				      <th >Descripcion</th>
+				      <th >Stock</th>
+				      <th >Precio de Compra</th>
+				      <th >Precio de Venta</th>
+				      <th >Acciones</th>
+				      
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="p: ${products}" >
+						<td th:text="${p.productCode}"></td>
+						<td th:text="${p.productName}"></td>
+						<td th:text="${p.productLine.productLine}"></td>
+						
+						<td th:text="${p.productScale}"></td>
+						<td th:text="${p.productVendor}"></td>
+						<td th:text="${p.productDescription}"></td>
+						<td th:text="${p.quantityInStock}"></td>
+						<td th:text="${p.buyPrice}"></td>
+						<td th:text="${p.MSRP}"></td>
+						<td> 
+							<a th:href="@{/product/modificar/}+${p.productCode}" class="btn btn-success">Editar</a>
+							<!-- <a th:href="@{/product/eliminar/}+${p.productCode}" class="btn btn-danger">Borrar</a>  -->
+						 </td>
+					</tr>
+				  </tbody>
+				</table>
+	        </div>
+	        </div>
+	        </section>
+	        </div>
+	     
+	      </div>
+	   <footer th:replace="/layouts/footer :: footer"> </footer>
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script> 
+		
+		
+      	
+	</body>
+</html>

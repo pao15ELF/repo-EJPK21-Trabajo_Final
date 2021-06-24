@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+	<head>
+		
+		<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Nuevo Producto Line</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+	<body class="body">
+	<header th:replace="/layouts/header :: header"> </header>
+	<div class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
+		<h3>Nueva Linea de Producto </h3> <hr>
+		</div>
+		<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
+      	
+      	<br>
+      	
+      	<div class="cont-form">
+      		
+      		<form  th:if="${bandera==true}" th:action="@{/productLine/guardar}" th:object="${productLine}" method="post" class="row g-3">
+	      			<div class="col-md-4" >	
+	            		<label for="productLine" class="form-label">Linea de Producto (Identificador)</label>
+	            		<input th:field="*{productLine}" type="text" class="form-control" id="productLine" />
+	            		
+          			</div>
+          		
+	          		<div class="col-md-4">
+	            		<label for="textDescription" class="form-label">Descripción</label>
+	            		<input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" />
+	          		</div>
+	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+							th:if="${#fields.hasErrors('textDescription')}"
+							th:errors="*{textDescription}"></div>-->
+          		
+	          		<div class="col-md-4">
+	            		<label for="htmlDescription" class="form-label">Direccion HTML</label>
+	            		<input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" />
+	          		</div>
+	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+							th:if="${#fields.hasErrors('htmlDescription')}"
+							th:errors="*{htmlDescription}"></div>-->
+	          		<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+	          		<div class="col-md-8 offset-md-2">
+          			<br>
+          			<br>
+	            	<!-- 	<label for="image" class="form-label">  Subir Imagen</label>
+	            		<div class="col-md-12 offset-md-3 ">
+	            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
+	            			
+	            			<input th:field="*{image}" type="file" class="form-control-file inputfile " id="image" 
+	            				accept="image/x-png,image/gif,image/jpeg,image/png"
+	            				onchange="loadFile(event)" style="margin-top: 30px;"
+	            			/> 
+	            			
+	            		</div> -->
+            		
+          			</div>
+          		
+	          		<div class="col-md-12 offset-md-3">
+		            	<button type="submit" class="btn mt-3 btn-primary">
+		             	 Guardar Linea de Producto
+		            	</button>
+	          		</div>
+      		</form>
+      		<form  th:if="${bandera==false}" th:action="@{/productLine/guardar/modificar}" th:object="${productLine}" method="post" class="row g-3">
+	      			<div class="col-md-4" >	
+	            		<label for="productLine" class="form-label">Linea de Producto (Identificador)</label>
+	            		
+	            		<input th:field="*{productLine}" type="hidden" class="form-control" id="productLine" />
+	            		
+          			</div>
+          		
+          		 						
+	          		<div class="col-md-4">
+	            		<label for="textDescription" class="form-label">Descripción</label>
+	            		<input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" />
+	          		</div>
+          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('textDescription')}"
+						th:errors="*{textDescription}"></div>-->
+          		
+	          		<div class="col-md-4">
+	            		<label for="htmlDescription" class="form-label">Direccion HTML</label>
+	            		<input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" />
+	          		</div>
+          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+						th:if="${#fields.hasErrors('htmlDescription')}"
+						th:errors="*{htmlDescription}"></div>-->
+	          		<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+	          		<div class="col-md-8 offset-md-2">
+          			<br>
+          			<br>
+	            	<!-- 	<label for="image" class="form-label">  Subir Imagen</label>
+	            		<div class="col-md-12 offset-md-3 ">
+	            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
+	            			
+	            			<input th:field="*{image}" type="file" class="form-control-file inputfile " id="image" 
+	            				accept="image/x-png,image/gif,image/jpeg,image/png"
+	            				onchange="loadFile(event)" style="margin-top: 30px;"
+	            			/> 
+	            			
+	            		</div> -->
+            		
+          			</div>
+          		
+	          		<div class="col-md-12 offset-md-3">
+		            	<button type="submit" class="btn mt-3 btn-primary">
+		             	 Guardar Linea de Producto
+		            	</button>
+	          		</div>
+      		</form>
+      	</div>
+		</main>
+		
+    	
+    	<script>
+			var loadFile = function(event) {
+				var image = document.getElementById('output');
+				image.src = URL.createObjectURL(event.target.files[0]);
+			};
+		</script>
+		<footer th:replace="/layouts/footer :: footer"> </footer>
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+	</body>
+</html>
