@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.TPFinal.service;
 
+import java.util.List;
+
 import ar.edu.unju.fi.TPFinal.model.Customer;
 import ar.edu.unju.fi.TPFinal.model.Employee;
 
@@ -9,5 +11,9 @@ public interface ICustomerService {
 	
 	public Customer buscarCustomerPorId(Integer id);
 	
-	public Employee buscarEmployee(Employee employee);
+	public List<Customer> buscarCustomersPorEmployee(Employee employee);
+	
+	public List<Customer> listaCustomers();
+	
+	public void eliminarCustomer(Integer customerNumber);
 }
