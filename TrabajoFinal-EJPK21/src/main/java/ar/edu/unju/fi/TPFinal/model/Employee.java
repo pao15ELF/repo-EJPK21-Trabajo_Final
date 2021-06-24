@@ -13,9 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "EMPLOYEES")
+@Component
 public class Employee {
 	
 	@Id
@@ -23,30 +31,41 @@ public class Employee {
 	@Column(name = "employeeNumber")
 	private Integer employeeNumber;
 	
-	@Column(name = "lastName")
+	@NotEmpty(message="Debe ingresar el apellido del empleado")
+	@Column(name = "lastName", length=50, nullable=false)
 	private String lastName; //tamaño 50
 	
-	@Column(name = "firstName")
+	@NotEmpty(message="Debe ingresar el nombre del empleado")
+	@Column(name = "firstName", length=50, nullable=false)
 	private String firstName; //tamaño 50
 	
-	@Column(name = "extension")
+	@NotEmpty(message="Debe ingresar la extension")
+	@Column(name = "extension", length=10, nullable=false)
 	private String extension; // tamaño 10
 	
-	@Column(name = "email")
+	@Email(message="Ingrese una dirección de email valida.")
+	@NotEmpty(message="Debe ingresar un correo electronico valido")
+	@Column(name = "email", length=100, nullable=false)
 	private String email; // tamaño 100
 	
+	@Autowired
+	@Valid
+	@NotNull(message="Debe elegir un departamento")
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "officeCode")
 	private Office officeCode; //tamaño 10
 	
+	@Autowired
+	@Valid
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "reportsTo")
 	private Employee reportsTo; 
 	
-	@Column(name = "jobTitle")
+	@NotEmpty(message="Debe ingresar el titulo de trabajo del empleado")
+	@Column(name = "jobTitle", length=50, nullable=false)
 	private String jobTitle; //tamaño50
 	
-	@OneToMany(mappedBy = "salesRepEmployeeNumber",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "salesRepEmployeeNumber",fetch = FetchType.LAZY)//EAGER
 	private List<Customer> customers = new ArrayList<Customer>();
 	
 	public Employee()
@@ -146,8 +165,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName
-				+ ", extension=" + extension + ", email=" + email + ", officeCode=" + officeCode + ", reportsTo="
-				+ reportsTo + ", jobTitle=" + jobTitle + "]";
+				+ ", extension=" + extension + ", email=" + email + ", jobTitle=" + jobTitle + "]";
 	}
 
 

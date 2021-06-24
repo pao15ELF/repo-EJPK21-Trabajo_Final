@@ -13,9 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="ORDERS")
+@Component
 public class Order {
 
 	@Id
@@ -23,26 +31,34 @@ public class Order {
 	@Column(name = "orderNumber")
 	private Integer orderNumber;
 	
-	@Column(name = "orderDate")
-	private LocalDate orderDate; //
+	@NotNull(message="Debe ingresar la fecha de la orden ")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "orderDate", nullable=false)
+	private LocalDate orderDate; 
 	
-	@Column(name = "requiredDate")
+	@NotNull(message="Debe ingresar la fecha de retiro de la orden ")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "requiredDate", nullable=false)
 	private LocalDate requiredDate;
 	
-	@Column(name = "shippedDate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "shippedDate", nullable=true)
 	private LocalDate shippedDate;
 	
-	@Column(name = "status")
+	@NotEmpty(message="Debe ingresar el estado de la orden")
+	@Column(name = "status", length=15, nullable=false)
 	private String status; //tamaño 15
 	
-	@Column(name = "comments")
+	@Size(max=250, message="El comentario no debe pasar los 250 caracteres")
+	@Column(name = "comments", length=250, nullable=true)
 	private String comments; //es TEXT definir tamaño
 	
+	@Valid
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customerNumber")
 	private Customer customerNumber;
 	
-	@OneToOne(mappedBy = "orderDetailId.orderNumber" ,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "orderDetailId.orderNumber" ,fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private OrderDetail orderDetail;
 	
 	public Order()
