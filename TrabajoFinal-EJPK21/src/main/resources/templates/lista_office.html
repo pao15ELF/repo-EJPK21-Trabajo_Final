@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Customers</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+<body>
+	<header th:replace="/layouts/header :: header"> </header>
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-md-10">
+				<h3 class="text-center"> Listado de Clientes</h3>
+				<hr>
+				<div class="text-center">
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-dark"> 
+			    <tr>
+			      <th>Office Code</th>
+			      <th>Country</th>
+			      <th>State</th>
+			      <th>City</th>
+			      <th>Territory</th>
+			      <th>Postal Code</th>
+			      <th>Phone</th>
+			      <th>Address Line 1</th>
+			      <th>Address Line 2</th>
+			      <th>Actions</th>
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr class="text-white" th:each="o: ${offices}" >
+					<td th:text="${o.officeCode}"></td>
+					<td th:text="${o.country}"></td>
+					<td th:text="${o.state}"></td>
+					<td th:text="${o.city}"></td>
+					<td th:text="${o.territory}"></td>
+					<td th:text="${o.postalCode}"></td>
+					<td th:text="${o.phone}"></td>
+					<td th:text="${o.addressLine1}"></td>
+					<td th:text="${o.addressLine2}"></td>
+					<td> 
+						<a th:href="@{/office/edit/}+${o.officeCode}" class="btn btn-success">Edit</a>
+						<a th:href="@{/office/delete/}+${o.officeCode}" class="btn btn-danger">Delete</a>
+					 </td>
+				</tr>
+			  </tbody>
+			</table>
+        </div>
+        </div>
+        </section>
+         <aside th:replace="/layouts/publicidad :: aside"> </aside>
+        </div>
+        
+
+         
+          
+     
+      </div>
+      <footer th:replace="/layouts/footer :: footer"> </footer>
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+   
+    
+	</body>
+</html>
