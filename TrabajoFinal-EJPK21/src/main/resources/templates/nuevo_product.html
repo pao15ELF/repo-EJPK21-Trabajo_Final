@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
-	<head>
-		
-		<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Nuevo Producto Line</title>
-		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
-	</head>
-	<body class="body">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Formulario Nuevo Cliente</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
 	<header th:replace="/layouts/header :: header"> </header>
-    <div class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
-		<h3>Nuevo Producto </h3> <hr>
-		</div>
-    <main class="form-text text-danger col-sm-10 offset-2">
-      	
-      
-      <div class="form-text text-danger col-sm-10 ">
+	<!-- Container -->
+	<div class="container">
+
+		<div class="row col-sm-12 col-md">
+			<div class="col-sm-10 col-md">
+				<!-- Formulario -->
+
+				<h1 class="text-center">Cargar de datos del producto</h1>
+				<hr>
+        <form  th:if="${bandera==true}" th:action="@{/product/guardar}" th:object="${product}" method="post">
         
-        <form  th:if="${bandera==true}" th:action="@{/product/guardar}" th:object="${product}" method="post" class="row g-3">
-        
-        <div class="form-text text-danger col-sm-10 ">
+        <div class="form-group">
             <label for="productCode" class="form-label">Codigo Producto</label>
             <input th:field="*{productCode}" type="text" class="form-control" id="productCode" />
         </div>
-        <div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+        <div  th:if="${mensajeError}" th:text="${mensajeError}"></div>
         <div class="form-text text-danger col-sm-10 offset-2"
 						th:if="${#fields.hasErrors('productCode')}"
 						th:errors="*{productCode}"></div>
 						
-          <div class="form-text text-danger col-sm-10">
+          <div class="form-group">
             <label for="productName" class="form-label"> Nombre Producto</label>
             <input th:field="*{productName}" type="text" class="form-control" id="productName" />
           </div>
@@ -36,7 +38,7 @@
 						th:if="${#fields.hasErrors('productName')}"
 						th:errors="*{productName}"></div>
           
-          <div class="form-text text-danger col-sm-10 ">
+         <div class="form-group">
             <label for="productScale" class="form-label">Escala Producto</label>
             <input th:field="*{productScale}" type="text" class="form-control" id="productScale" />
           </div>
@@ -44,7 +46,7 @@
 						th:if="${#fields.hasErrors('productScale')}"
 						th:errors="*{productScale}"></div>
           
-          <div class="form-text text-danger col-sm-10">
+         <div class="form-group">
             <label for="productVendor" class="form-label">Vendedor Producto</label>
             <input th:field="*{productVendor}" type="text" class="form-control" id="productVendor" />
           </div>
@@ -53,7 +55,7 @@
 						th:errors="*{productVendor}"></div>
           
           
-          <div class="form-text text-danger col-sm-10">
+         <div class="form-group">
             <label for="productDescription" class="form-label">Descripción de Producto</label>
             <input th:field="*{productDescription}" type="text"
               class="form-control" id="productDescription" placeholder="Descripción del producto . . . . " />
@@ -62,7 +64,7 @@
 						th:if="${#fields.hasErrors('productDescription')}"
 						th:errors="*{productDescription}"></div>
           
-          <div class="form-text text-danger col-sm-10">
+         <div class="form-group">
             <label for="quantityInStock" class="form-label">Quantity in Stock</label>
             <input th:field="*{quantityInStock}" type="text" class="form-control" id="quantityInStock" />
           </div>
@@ -70,7 +72,7 @@
 						th:if="${#fields.hasErrors('quantityInStock')}"
 						th:errors="*{quantityInStock}"></div>
           
-          <div class="form-text text-danger col-sm-10 ">
+          <div class="form-group">
             <label for="buyPrice" class="form-label">Precio</label>
           	 <input th:field="*{buyPrice}" type="text" class="form-control" id="buyPrice" />
           </div>
@@ -78,7 +80,7 @@
 						th:if="${#fields.hasErrors('buyPrice')}"
 						th:errors="*{buyPrice}"></div>
           
-          <div class="form-text text-danger col-sm-10 ">
+         <div class="form-group">
             <label for="MSRP" class="form-label">MSRP</label>
             <input th:field="*{MSRP}" type="text" class="form-control" id="MSRP" />
           </div>
@@ -88,7 +90,7 @@
           
            <!-- Select Product Line -->
            <br>
-          <div class="col-sm-10">
+          <div class="form-group">
             <label  for="productLine" class="form-label">Linea de Producto</label>
             <select th:field="*{productLine.productLine}" name="productLine" id="productLine" class="form-control">
 				<option th:each="p: ${listaProductLine}" 
@@ -100,7 +102,7 @@
           </div>
   
           <!-- Fin product line -->
-          <div class="col-sm-10">
+          <div class="form-group">
             <button type="submit" class="btn mt-2 btn-primary">
               Save Product
             </button>
@@ -185,19 +187,23 @@
 						th:value="${p.productLine}" 
 						th:text="${p.productLine}" >
 				</option>
-								  
+							
 			</select>
           </div>
   
           <!-- Fin product line -->
           <div class="col-sm-10">
             <button type="submit" class="btn mt-2 btn-primary">
-              Save Product
+              Guardar Producto
             </button>
+            
           </div>
+          
         </form>
       </div>
-      </main>
+      <aside th:replace="/layouts/publicidad :: aside"></aside>
+      </div>
+      </div>
     
     <footer th:replace="/layouts/footer :: footer"> </footer>
 <script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>

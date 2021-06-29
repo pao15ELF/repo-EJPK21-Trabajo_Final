@@ -1,51 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
-	<head>
-		
-		<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Nuevo Producto Line</title>
-		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
-	</head>
-	<body class="body">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Formulario Producto Linea</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
+<body>
 	<header th:replace="/layouts/header :: header"> </header>
-	<div class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
-		<h3>Nueva Linea de Producto </h3> <hr>
-		</div>
-		<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
-      	
-      	<br>
-      	
-      	<div class="cont-form">
-      		
-      		<form  th:if="${bandera==true}" th:action="@{/productLine/guardar}" th:object="${productLine}" method="post" class="row g-3">
-	      			<div class="col-md-4" >	
+	<!-- Container -->
+	<div class="container">
+
+		<div class="row col-sm-12 col-md">
+			<div class="col-sm-10 col-md">
+				<!-- Formulario -->
+
+				<h1 class="text-center">Cargar de datos de Linea de Producto</h1>
+				<hr>
+      		<form  th:if="${bandera==true}" th:action="@{/productLine/guardar}" th:object="${productLine}" method="post">
+	      			<div class="form-group">
 	            		<label for="productLine" class="form-label">Linea de Producto (Identificador)</label>
 	            		<input th:field="*{productLine}" type="text" class="form-control" id="productLine" />
 	            		
           			</div>
           		
-	          		<div class="col-md-4">
+	          		<div class="form-group">
 	            		<label for="textDescription" class="form-label">Descripción</label>
 	            		<input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" />
 	          		</div>
-	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+	          		<div class="form-text text-danger col-sm-10 offset-2"
 							th:if="${#fields.hasErrors('textDescription')}"
-							th:errors="*{textDescription}"></div>-->
+							th:errors="*{textDescription}"></div>
           		
-	          		<div class="col-md-4">
+	          		<div class="form-group">
 	            		<label for="htmlDescription" class="form-label">Direccion HTML</label>
 	            		<input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" />
 	          		</div>
-	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+	          		  <div class="form-text text-danger col-sm-10 offset-2"
 							th:if="${#fields.hasErrors('htmlDescription')}"
-							th:errors="*{htmlDescription}"></div>-->
+							th:errors="*{htmlDescription}"></div>
 	          		<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
 	          		<div class="col-md-8 offset-md-2">
           			<br>
           			<br>
-	            	<!-- 	<label for="image" class="form-label">  Subir Imagen</label>
-	            		<div class="col-md-12 offset-md-3 ">
+	            	 	<label for="image" class="form-label">  Subir Imagen</label>
+	            		<div class="form-group">
 	            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
 	            			
 	            			<input th:field="*{image}" type="file" class="form-control-file inputfile " id="image" 
@@ -53,11 +54,11 @@
 	            				onchange="loadFile(event)" style="margin-top: 30px;"
 	            			/> 
 	            			
-	            		</div> -->
+	            		</div> 
             		
           			</div>
           		
-	          		<div class="col-md-12 offset-md-3">
+	          		<div class="form-group">
 		            	<button type="submit" class="btn mt-3 btn-primary">
 		             	 Guardar Linea de Producto
 		            	</button>
@@ -72,26 +73,26 @@
           			</div>
           		
           		 						
-	          		<div class="col-md-4">
+	          		<div class="form-group">
 	            		<label for="textDescription" class="form-label">Descripción</label>
 	            		<input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" />
 	          		</div>
-          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+          		 <div class="form-text text-danger col-sm-10 offset-2"
 						th:if="${#fields.hasErrors('textDescription')}"
-						th:errors="*{textDescription}"></div>-->
+						th:errors="*{textDescription}"></div>
           		
-	          		<div class="col-md-4">
+	          		<div class="form-group">
 	            		<label for="htmlDescription" class="form-label">Direccion HTML</label>
 	            		<input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" />
 	          		</div>
-          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+          		  <div class="form-text text-danger col-sm-10 offset-2"
 						th:if="${#fields.hasErrors('htmlDescription')}"
 						th:errors="*{htmlDescription}"></div>-->
 	          		<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
 	          		<div class="col-md-8 offset-md-2">
           			<br>
           			<br>
-	            	<!-- 	<label for="image" class="form-label">  Subir Imagen</label>
+	            		<label for="image" class="form-label">  Subir Imagen</label>
 	            		<div class="col-md-12 offset-md-3 ">
 	            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
 	            			
@@ -100,7 +101,7 @@
 	            				onchange="loadFile(event)" style="margin-top: 30px;"
 	            			/> 
 	            			
-	            		</div> -->
+	            		</div> 
             		
           			</div>
           		
@@ -111,7 +112,9 @@
 	          		</div>
       		</form>
       	</div>
-		</main>
+      	<aside th:replace="/layouts/publicidad :: aside"></aside>
+		</div>
+		</div>
 		
     	
     	<script>
