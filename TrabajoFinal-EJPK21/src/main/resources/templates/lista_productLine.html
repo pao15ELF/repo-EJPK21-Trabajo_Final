@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Lista ProductoLine</title>
+		<title>Lista ProductLine</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 	</head>
 <body>
 	<header th:replace="/layouts/header :: header"> </header>
-	<main class="form-text  w-75 m-auto mt-3 mb-3 main text-center">
-      <h3>Lineas de  Linea Productos</h3>
+	<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
+      <h3>Lineas de Productos</h3>
       <hr>
     </main>
 	<div class="container-fluid">
@@ -24,6 +24,7 @@
 					      <th >Descripción</th>
 					      <th >Html Direccion</th>
 					      <th >Imagen</th>
+					      <th >Estado</th>
 					      <th >Acciones </th>
 					    </tr>
 					  </thead>
@@ -33,10 +34,11 @@
 							<td th:text="${p.textDescription}"></td>
 							<td th:text="${p.htmlDescription}"></td>
 							<td th:text="${p.image}"></td>
+							<td th:text="${p.status}"></td>
 							<td> 
 								<a th:href="@{/productLine/modificar/}+${p.productLine}" class="btn btn-success">Editar</a>
-								<!--  <a th:href="@{/product/productLine/delete/}+${p.productLine}" class="btn btn-danger">Delete</a> -->
-							 </td>
+								<a th:href="@{/productLine/eliminar/}+${p.productLine}" class="btn btn-danger">Inhabilitar</a>
+							</td>
 						</tr>
 					  </tbody>
 					</table>

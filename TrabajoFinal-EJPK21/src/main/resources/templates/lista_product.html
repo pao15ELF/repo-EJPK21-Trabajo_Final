@@ -8,7 +8,7 @@
 	</head>
 <body>
 	<header th:replace="/layouts/header :: header"> </header>
-	<main class="form-text  w-75 m-auto mt-3 mb-3 main text-center">
+	<main class="form-text text-danger w-75 m-auto mt-3 mb-3 main text-center">
       <h3>Lista de productos</h3>
        </main>
 	<div class="container-fluid">
@@ -24,13 +24,13 @@
 				      <th>Codigo del Producto</th>
 				      <th>Producto</th>
 				      <th>Marca</th>
-				     
 				      <th>Escala</th>
 				      <th >Vendedor</th>
 				      <th >Descripcion</th>
 				      <th >Stock</th>
 				      <th >Precio de Compra</th>
-				      <th >Precio de Venta</th>
+				      <th >(MSRP)Precio de Venta Sugerido</th>
+				      <th > Estado </th> 
 				      <th >Acciones</th>
 				      
 				    </tr>
@@ -47,10 +47,11 @@
 						<td th:text="${p.quantityInStock}"></td>
 						<td th:text="${p.buyPrice}"></td>
 						<td th:text="${p.MSRP}"></td>
+						<td th:text="${p.status}"></td>
 						<td> 
 							<a th:href="@{/product/modificar/}+${p.productCode}" class="btn btn-success">Editar</a>
-							<!-- <a th:href="@{/product/eliminar/}+${p.productCode}" class="btn btn-danger">Borrar</a>  -->
-						 </td>
+							<a th:href="@{/product/eliminar/}+${p.productCode}" class="btn btn-danger">Inhabilitar</a>
+						</td>
 					</tr>
 				  </tbody>
 				</table>
