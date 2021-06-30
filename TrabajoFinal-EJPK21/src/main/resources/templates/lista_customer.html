@@ -20,8 +20,8 @@
 								<tr> 
 									<th> ID</th>
 									<th> Nombre Completo</th>
-									<th> Apellido (Preg)</th>
-									<th> Nombre (Preg)</th>
+									<th> Apellido </th>
+									<th> Nombre </th>
 									<th> Telefono </th>
 									<th> Direccion 1</th>
 									<th> Direccion 2</th>
@@ -49,15 +49,13 @@
 									<td th:text="${c.postalCode}"> </td>
 									<td th:text="${c.country}"> </td>
 									<td th:if="${c.salesRepEmployeeNumber==null}"> </td>
-									
 									<td th:if="${c.salesRepEmployeeNumber!=null}" th:text="${c.salesRepEmployeeNumber.lastName}+' '+${c.salesRepEmployeeNumber.firstName}"> </td>
-									
 									<td th:text="${c.creditLimit}"> </td>
-							
+									<td th:text="${c.status}"> </td>
 									<td> 
-										<a th:href="@{/customer/modificar/}+${c.customerNumber}" class= "btn btn-warning" >EDITAR</a>		
+										<a th:href="@{/customer/modificar/}+${c.customerNumber}" class= "btn btn-warning" >Editar</a>		
 										<br><br>
-										<a th:href="@{/customer/eliminar/}+${c.customerNumber}" class= "btn btn-danger" >ELIMINAR</a>
+										<a th:href="@{/customer/eliminar/}+${c.customerNumber}" class= "btn btn-danger" >Inhabilitar</a>
 									</td>
 									
 								</tr>

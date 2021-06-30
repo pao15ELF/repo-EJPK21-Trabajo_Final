@@ -29,6 +29,7 @@ class OfficeTest {
 		office.setPostalCode("4600");
 		office.setState("---");
 		office.setTerritory("ARG");
+		office.setStatus("ACTIVO");
 		
 		officeService.guardarOffice(office);
 		
