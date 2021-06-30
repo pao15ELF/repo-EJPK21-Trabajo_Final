@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.TPFinal.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.TPFinal.model.Employee;
-import ar.edu.unju.fi.TPFinal.model.Office;
 import ar.edu.unju.fi.TPFinal.service.IEmployeeService;
 import ar.edu.unju.fi.TPFinal.service.IOfficeService;
 
@@ -38,6 +39,9 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/nuevo")
 	public ModelAndView getNuevoEmployeePage() {
+		LOGGER.info("CONTROLLER: EmployeeController");
+		LOGGER.info("METHOD: getNuevoEmployeePage()");
+		LOGGER.info("RESULT: visualiza la pagina nuevo_employee.html, enviando la lista de oficinas,de empleados y un objeto del tipo empleado vacio");
 		ModelAndView mav = new ModelAndView("nuevo_employee");
 		mav.addObject("employee", employee);
 		mav.addObject("offices", officeService.obtenerListaOffices());
@@ -47,6 +51,9 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/lista")
 	public ModelAndView getListaEmployeePage() {
+		LOGGER.info("CONTROLLER: EmployeeController");
+		LOGGER.info("METHOD: getListaEmployeePage()");
+		LOGGER.info("RESULT: visualiza la pagina lista_employee.html con todos los datos de los empleados");
 		ModelAndView mav = new ModelAndView("lista_employee");
 		mav.addObject("employees", employeeService.listaemployees());
 		return mav;
@@ -54,7 +61,17 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/eliminar/{employeeNumber}")
 	public ModelAndView getEliminarEmployeePage(@PathVariable(value ="employeeNumber")Integer id) {
+		LOGGER.info("CONTROLLER: EmployeeController");
+		LOGGER.info("METHOD: getEliminarEmployeePage()");
+		LOGGER.info("RESULT: elimina un empleado y visualiza la pagina lista_employee.html con todos los datos de los empleados");
 		ModelAndView mav = new ModelAndView("lista_employee");
+		//cambia a null los reportTo de cada empleado que reportaba al empleado a eliminar
+		Employee encontrado = employeeService.buscarEmployeePorId(id);
+		List<Employee> lista = employeeService.buscarEmployeePorReportTo(encontrado);
+		for(Employee e: lista) {
+			e.setReportsTo(null);
+			employeeService.guardarEmployee(e);
+		}
 		employeeService.eliminarEmployee(id);
 		mav.addObject("employees", employeeService.listaemployees());
 		
@@ -63,6 +80,10 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/modificar/{employeeNumber}")
 	public ModelAndView getModificarEmployeePage(@PathVariable(value = "employeeNumber")Integer id) {
+		LOGGER.info("CONTROLLER: EmployeeController");
+		LOGGER.info("METHOD: getModificarEmployeePage()");
+		LOGGER.info("RESULT: modifica un empleado y visualiza la pagina lista_employee.html con todos los datos de los empleados");
+		
 		ModelAndView mav = new ModelAndView("nuevo_employee");
 		Employee encontrado = employeeService.buscarEmployeePorId(id);
 		mav.addObject("employee",encontrado );
@@ -73,9 +94,11 @@ public class EmployeeController {
 	
 	@PostMapping("/employee/guardar")
 	public ModelAndView postGuardarEmployeePage(@Valid @ModelAttribute("employee")Employee unEmployee, BindingResult resultadoValidacion) {
+		LOGGER.info("CONTROLLER: EmployeeController");
+		LOGGER.info("METHOD: postGuardarEmployeePage()");
+		LOGGER.info("RESULT: controla los datos del empleado cargado, si es correcto lo guarda y muestra nuevo_employee.html sino redirecciona a nuevo_employee.html ");
+		
 		ModelAndView mav;
-		Employee reportTo;
-		Office office;
 		if (resultadoValidacion.hasErrors()) {
 			mav = new ModelAndView("nuevo_employee");
 			mav.addObject("employee", unEmployee);

@@ -51,4 +51,11 @@ public class ProductServiceImp implements IProductService {
 		List<Product> lista = (List<Product>) productRepository.findAll();
 		return lista;
 	}
+
+	@Override
+	public List<Product> obtenerListaProductsPorEstadoActivo() {
+		List<Product> lista = productRepository.findByStatus("EN LINEA");
+		return lista;
+	}
+
 }

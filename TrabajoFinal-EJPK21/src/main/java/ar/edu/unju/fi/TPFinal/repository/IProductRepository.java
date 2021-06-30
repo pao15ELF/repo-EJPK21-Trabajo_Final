@@ -9,4 +9,6 @@ import ar.edu.unju.fi.TPFinal.model.ProductLine;
 
 public interface IProductRepository extends CrudRepository<Product, String>{
 	public List<Product> findByProductLine(ProductLine productLine);
+	
+	public List<Product> findByStatus(String status);
 }

@@ -47,5 +47,11 @@ public class CustomerServiceImp implements ICustomerService {
 		
 	}
 
+	@Override
+	public List<Customer> obtenerListaCustomersActivos(String status) {
+		List<Customer> lista = customerRepository.findByStatus("Activo");
+		return lista;
+	}
+
 	
 }

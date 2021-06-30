@@ -56,7 +56,6 @@ public class Employee {
 	private Office officeCode; //tamaño 10
 	
 	@Autowired
-	@Valid
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "reportsTo")
 	private Employee reportsTo; 

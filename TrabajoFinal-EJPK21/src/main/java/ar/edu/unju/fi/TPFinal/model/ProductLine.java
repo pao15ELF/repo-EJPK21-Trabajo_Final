@@ -36,6 +36,9 @@ public class ProductLine {
 	@Column(name = "image")
 	private Blob image;  //Averiguar 
 	
+	@Column(name = "status")
+	private String status;
+	
 	@OneToMany(mappedBy = "productLine" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Product> products = new ArrayList<Product>();
 	
@@ -45,19 +48,29 @@ public class ProductLine {
 	}
 	
 
+	
+
 	/**
 	 * @param productLine
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
+	 * @param status
 	 */
-	public ProductLine(String productLine, String textDescription, String htmlDescription, Blob image) {
-		super();
+	public ProductLine(@NotNull(message = "La linea de producto no puede ser nulo") String productLine,
+			@Size(max = 4000, message = "La descripcion se pasa de los 4000 caracteres permitidos.") String textDescription,
+			@Size(max = 200, message = "La direccion se pasa de los 200 caracteres permitidos.") String htmlDescription,
+			Blob image, String status) {
+		
 		this.productLine = productLine;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
+		this.status = status;
 	}
+
+
+
 
 	/**
 	 * @return the productLine
@@ -137,12 +150,29 @@ public class ProductLine {
 		this.products = products;
 	}
 
+	
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	@Override
 	public String toString() {
 		return "ProductLine [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
-				+ htmlDescription + ", image=" + image + "]";
+				+ htmlDescription + ", image=" + image + ", status=" + status + "]";
 	}
+
 
 		
 }

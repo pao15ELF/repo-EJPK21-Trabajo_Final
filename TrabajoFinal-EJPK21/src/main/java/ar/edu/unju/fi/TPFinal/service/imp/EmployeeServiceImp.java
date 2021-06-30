@@ -45,4 +45,10 @@ public class EmployeeServiceImp implements IEmployeeService {
 		List<Employee> lista = (List<Employee>) employeeRepository.findAll();
 		return lista;
 	}
+
+	@Override
+	public List<Employee> buscarEmployeePorReportTo(Employee employee) {
+		List<Employee> lista = employeeRepository.findByReportsTo(employee);
+		return lista;
+	}
 }

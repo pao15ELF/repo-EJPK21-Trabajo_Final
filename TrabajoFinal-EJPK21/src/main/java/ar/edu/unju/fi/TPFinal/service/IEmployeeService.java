@@ -16,4 +16,6 @@ public interface IEmployeeService {
 	public void eliminarEmployee(Integer employeeNumber);
 	
 	public List<Employee> listaemployees();
+	
+	public List<Employee> buscarEmployeePorReportTo(Employee employee);
 }

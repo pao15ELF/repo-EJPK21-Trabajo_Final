@@ -17,4 +17,6 @@ public interface IProductService {
 	
 	public List<Product> obtenerListaProducts();
 	
+	public List<Product> obtenerListaProductsPorEstadoActivo();
+	
 }
