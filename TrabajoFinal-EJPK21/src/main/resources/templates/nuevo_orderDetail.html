@@ -21,24 +21,6 @@
 				<hr>
 				<form action="/orderDetail/cargar/siguiente" th:object="${orderDetail}" method="post">
 
-
-					<!-- Customer Number no iria-->
-					<!-- <div class="form-group ">
-						<label>Order Number</label> <select
-							th:field="*{orderDetailId.orderNumber.orderNumber}"
-							class="form-control">
-							<option th:each="od : ${orderDetail}"
-								th:value="${od.orderDetailId.orderNumber.orderNumber}"
-								th:text="${od.orderDetailId.orderNumber.orderNumber}"
-								th:selected="false"></option>
-						</select>
-					</div> -->
-					<!-- Fin Customer Number -->
-						
-					<!-- EmployeeNumber
-					orderDetailId.productCode.productCode
-					od.orderDetailId.productCode.productCode
-					-->
 					<div class="form-group ">
 						<label>Producto</label> 
 						<select th:field="*{orderDetailId.productCode}" class="form-control">
@@ -57,10 +39,11 @@
 							type="number" class="form-control" id="quantityOrdered"
 							th:field="*{quantityOrdered}">
 					</div>
-					<div class="form-text text-danger col-sm-10 offset-2"
+					<div class="form-text text-danger "
 						th:if="${#fields.hasErrors('quantityOrdered')}"
 						th:errors="*{quantityOrdered}"></div>
-
+					<div class="form-text text-danger col-sm-10 " th:if="${mensajeControl}" th:text="${mensajeControl}"></div>
+					
 					<!-- Fin Quantity Ordered -->
 
 					<!-- Price Each -->
@@ -68,7 +51,7 @@
 						<label for="priceEach">Precio por Unidad</label> <input type="number"
 							class="form-control" id="priceEach" th:field="*{priceEach}">
 					</div>
-					<div class="form-text text-danger col-sm-10 offset-2"
+					<div class="form-text text-danger"
 						th:if="${#fields.hasErrors('priceEach')}" th:errors="*{priceEach}"></div>
 					<!-- Fin Price Each-->
 
@@ -78,23 +61,17 @@
 							type="number" class="form-control" id="orderLineNumber"
 							th:field="*{orderLineNumber}">
 					</div>
-					<div class="form-text text-danger col-sm-10 offset-2"
+					<div class="form-text text-danger"
 						th:if="${#fields.hasErrors('orderLineNumber')}"
 						th:errors="*{orderLineNumber}"></div>
 
 					<!-- Order Line Number -->
 
-
-					<br> <br>
-					<button type="submit" class="btn btn-primary">Siguiente</button>
-					
+					<button type="submit" class="btn btn-primary">Cargar Otro Producto</button>
+					<button onclick="location.href='/order/nuevo'" class="btn btn-success" type="button">Terminar Pedido</button>
 				</form>
 				<br>
 				<br>
-				<div>
-					<a href="/order/nuevo">Terminar</a>
-					
-				</div>
 			</div>
 
 			<aside th:replace="/layouts/publicidad :: aside"></aside>

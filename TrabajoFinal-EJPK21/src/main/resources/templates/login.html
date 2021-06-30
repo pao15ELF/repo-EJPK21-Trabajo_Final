@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+	</head>
+<body>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+			
+			</div>
+			<div class="col-md-4 " >
+				<section class="col-md-10">
+					</br>
+					</br>
+					<h3 class="text-center"> Login</h3>
+					<hr>
+					<div class="text-center ">
+					</br>
+					</br>
+					<form class="form" th:action="@{/login}"  method="POST">
+						<div class="form-group ">
+							<label for="usuario">Usuario</label>
+							<input type="text" class="form-control" id="username" name="username">
+						</div>
+						
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" id="password" name="password">
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" class="bg-dark  btn btn-primary" >Ingresar</button>
+						</div>
+					</form>
+					<div class="alert-danger text-center" th:if="${param.error}">Credenciales incorrectas</div>
+					
+   				</div>
+    			</section>
+    		</div>
+  			<div class="col-md-4">
+  			
+  			</div>
+    	</div>   
+	</div>
+	
+<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+   
+    
+	</body>
+</html>

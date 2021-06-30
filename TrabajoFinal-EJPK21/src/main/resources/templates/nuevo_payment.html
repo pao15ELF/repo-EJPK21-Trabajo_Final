@@ -26,25 +26,25 @@
 						<label for="checkNumber">Numero de Check </label> <input type="number"
 							class="form-control" id="checkNumber" th:field="*{paymentId.checkNumber}">
 					</div>
-					<div class="form-text text-danger col-sm-10 offset-2"
+					<div class="form-text text-danger"
 						th:if="${#fields.hasErrors('paymentId.checkNumber')}" th:errors="*{paymentId.checkNumber}"></div>
 
 					<!-- Fin Check Number -->
 
 					<!-- Payment Date-->
 					<div class="form-group">
-						<label for="paymentDate">Payment Date</label> 
+						<label for="paymentDate">Fecha de Pago</label> 
 						<input type="date" class="form-control" id="paymentDate" th:field="*{paymentDate}">
 					</div>
-					<div class="form-text text-danger col-sm-10 offset-2"
+					<div class="form-text text-danger"
 						th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"></div>
 
 					<!-- Fin Payment Date -->
 					
 					<!-- Amount-->
 					<div class="form-group">
-						<label for="amount">Total a pagar</label> 
-						<input type="number" class="form-control" id="amount" th:text="${total}">
+						<label>Total a pagar</label> 
+						<h1 th:type="number" class="form-control" th:text="${payment.total}"> </h1>
 					</div>
 					
 					<!--  <div class="form-text text-danger col-sm-10 offset-2"
@@ -63,29 +63,20 @@
 								th:selected="false"></option>
 
 						</select> -->
-						<h1 type="text" class="form-control" th:text="${customer.customerName}"></h1>
+						<h1 th:type="text" class="form-control" th:text="${customer.customerName}"></h1>
 					</div>
 					<!-- Fin customer -->
 
-					<br> <br>
 					<button type="submit" class="btn btn-primary">Pagar</button>
 				</form>
-				
-
 			</div>
-
 			<aside th:replace="/layouts/publicidad :: aside"></aside>
-
 		</div>
-
 	</div>
 	<!-- Fin Container -->
 	<footer th:replace="/layouts/footer :: footer"> </footer>
-	<script type="text/javascript"
-		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
-	<script type="text/javascript"
-		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
-	<script type="text/javascript"
-		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+	<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
 </body>
 </html>
