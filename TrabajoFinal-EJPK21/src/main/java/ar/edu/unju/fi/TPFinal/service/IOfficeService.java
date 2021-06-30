@@ -14,4 +14,6 @@ public interface IOfficeService {
 	public List<Office> obtenerListaOffices();
 	
 	public void eliminarOffice(String officeId);
+	
+	public List<Office> buscarOfficePorOfficeCode(String officeCode);
 }

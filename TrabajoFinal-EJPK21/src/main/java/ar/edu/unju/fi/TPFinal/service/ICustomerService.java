@@ -16,4 +16,6 @@ public interface ICustomerService {
 	public List<Customer> listaCustomers();
 	
 	public void eliminarCustomer(Integer customerNumber);
+	
+	public List<Customer> obtenerListaCustomersActivos(String status);
 }

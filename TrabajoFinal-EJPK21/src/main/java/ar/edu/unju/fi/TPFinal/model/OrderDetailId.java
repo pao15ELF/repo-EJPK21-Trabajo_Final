@@ -30,7 +30,7 @@ private static final long serialVersionUID = 1L;
 	{
 		
 	}
-
+	
 	/**
 	 * @param orderNumber
 	 * @param productCode
@@ -40,46 +40,46 @@ private static final long serialVersionUID = 1L;
 		this.orderNumber = orderNumber;
 		this.productCode = productCode;
 	}
-
+	
 	/**
 	 * @return the orderNumber
 	 */
 	public Order getOrderNumber() {
 		return orderNumber;
 	}
-
+	
 	/**
 	 * @param orderNumber the orderNumber to set
 	 */
 	public void setOrderNumber(Order orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-
+	
 	/**
 	 * @return the productCode
 	 */
 	public Product getProductCode() {
 		return productCode;
 	}
-
+	
 	/**
 	 * @param productCode the productCode to set
 	 */
 	public void setProductCode(Product productCode) {
 		this.productCode = productCode;
 	}
-
+	
 	/**
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "OrderDetailId [orderNumber=" + orderNumber + "]";
 	}
 	
-	
+
 }

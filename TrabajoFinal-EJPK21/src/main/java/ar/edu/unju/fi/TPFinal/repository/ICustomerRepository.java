@@ -12,4 +12,6 @@ public interface ICustomerRepository extends CrudRepository<Customer,Integer> {
 public Customer findByCustomerNumber(Integer id);
 	
 	public List<Customer> findBySalesRepEmployeeNumber(Employee employee);
+	
+	public List<Customer> findByStatus(String status);
 }

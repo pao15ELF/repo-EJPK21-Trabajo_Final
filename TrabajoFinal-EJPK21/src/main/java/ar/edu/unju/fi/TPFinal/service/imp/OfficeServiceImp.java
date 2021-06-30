@@ -23,7 +23,13 @@ public class OfficeServiceImp implements IOfficeService{
 
 	@Override
 	public Office buscarOfficePorId(String id) {
-		Office office = officeRepository.findById(id).get();
+		Office office;
+		try {
+			office = officeRepository.findById(id).get();	
+		}catch(Exception e) {
+			e.getCause();
+			office=null;
+		}
 		return office;
 	}
 
@@ -37,5 +43,11 @@ public class OfficeServiceImp implements IOfficeService{
 	public void eliminarOffice(String officeId) {
 		officeRepository.deleteById(officeId);
 		
+	}
+
+	@Override
+	public List<Office> buscarOfficePorOfficeCode(String officeCode) {
+		List<Office> lista = officeRepository.findByOfficeCodeContaining(officeCode);
+		return lista;
 	}
 }

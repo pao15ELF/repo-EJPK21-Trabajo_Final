@@ -14,4 +14,6 @@ public interface IProductLineService {
 	public List<ProductLine> obtenerListaProductLines();
 	
 	public void EliminarProductLine(ProductLine productLine);
+	
+	public List<ProductLine> obtenerListaProductLinesEnLinea();
 }

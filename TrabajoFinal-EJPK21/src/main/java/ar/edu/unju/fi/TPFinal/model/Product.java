@@ -58,12 +58,16 @@ public class Product {
 	@Column(name = "MSRP", nullable=false)
 	private double MSRP; //precio de venta sugerido por el fabricante(bigDecimal)
 	
+	@Column(name = "status")
+	private String status;
 	
 	public Product()
 	{
 		
 	}
 	
+	
+
 	
 
 	/**
@@ -76,10 +80,19 @@ public class Product {
 	 * @param quantityInStock
 	 * @param buyPrice
 	 * @param mSRP
+	 * @param status
 	 */
-	public Product(String productCode, String productName, ProductLine productLine, String productScale,
-			String productVendor, String productDescription, short quantityInStock, double buyPrice, double mSRP) {
-		super();
+	public Product(@NotNull(message = "El codigo del producto no puede ser nulo. Ingrese un codigo") String productCode,
+			@NotEmpty(message = "Debe ingresar el nombre del producto") String productName,
+			@Valid @NotNull(message = "Debe ingresar una marca de producto") ProductLine productLine,
+			@NotEmpty(message = "Debe ingresar la escala del producto") String productScale,
+			@NotEmpty(message = "Debe ingresar nombre del vendedor del producto") String productVendor,
+			@NotEmpty(message = "Debe ingresar la descripcion del producto") String productDescription,
+			@Min(value = 0, message = "EL minimo del producto en Stock debe ser mayor a 0") short quantityInStock,
+			@Min(value = 0, message = "EL minimo del precio de compra del producto debe ser mayor a 0") double buyPrice,
+			@Min(value = 0, message = "EL minimo del precio sugerido de venta del producto debe ser mayor a 0") double mSRP,
+			String status) {
+		
 		this.productCode = productCode;
 		this.productName = productName;
 		this.productLine = productLine;
@@ -89,7 +102,10 @@ public class Product {
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
 		MSRP = mSRP;
+		this.status = status;
 	}
+
+
 
 
 
@@ -227,14 +243,33 @@ public class Product {
 
 	
 	
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "Product [productCode=" + productCode + ", productName=" + productName + ", productLine=" + productLine
 				+ ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescription="
 				+ productDescription + ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP="
-				+ MSRP + "]";
+				+ MSRP + ", status=" + status + "]";
 	}
 
-	
 	
 }

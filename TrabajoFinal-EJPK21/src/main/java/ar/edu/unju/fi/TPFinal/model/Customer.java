@@ -75,6 +75,8 @@ public class Customer {
 	@Column(name = "creditLimit")
 	private double creditLimit;
 	
+	@Column(name = "status")
+	private String status;
 	
 	@OneToMany(mappedBy = "customerNumber",fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<Order>();
@@ -413,6 +415,25 @@ public class Customer {
 	 */
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+
+	
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 

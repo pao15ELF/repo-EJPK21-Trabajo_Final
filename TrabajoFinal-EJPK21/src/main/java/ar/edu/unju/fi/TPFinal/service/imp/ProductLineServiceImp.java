@@ -47,5 +47,11 @@ public class ProductLineServiceImp implements IProductLineService{
 		productLineRepository.delete(productLine);
 	}
 
+	@Override
+	public List<ProductLine> obtenerListaProductLinesEnLinea() {
+		List<ProductLine> lista = productLineRepository.findByStatus("EN LINEA");
+		return lista;
+	}
+
 	
 }
