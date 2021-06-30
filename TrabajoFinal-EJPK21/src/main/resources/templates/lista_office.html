@@ -11,46 +11,69 @@
 	<div class="container-fluid">
 		<div class="row">
 			<section class="col-md-10">
-				<h3 class="text-center"> Listado de Clientes</h3>
+
+				<h3> BUSQUEDA DE OFICINAS</h3>
+					<form th:action="@{/office/buscar}" th:object="${officeAux}" method="post">	
+						<div class="form-group">
+							<label for="codOffice">Nombre de la Oficina</label>
+							<input type="text" class="form-control" id="codOffice" th:field="*{officeCode}" placeholder="Ingrese nombre(codigo) de la oficina">
+						</div>
+						<div class="form-text text-danger col-sm-10 " th:if="${mensaje}" th:text="${mensaje}"></div>
+						
+						<button type="submit" class="btn btn-primary">Buscar</button>
+					</form>	
+				<br>
+				<br>
+
+				<h3 class="text-center"> Listado de Oficinas</h3>
 				<hr>
 				<div class="text-center">
 					<div class="table-responsive">
 						<table class="table">
 							<thead class="thead-dark"> 
-			    <tr>
-			      <th>Office Code</th>
-			      <th>Country</th>
-			      <th>State</th>
-			      <th>City</th>
-			      <th>Territory</th>
-			      <th>Postal Code</th>
-			      <th>Phone</th>
-			      <th>Address Line 1</th>
-			      <th>Address Line 2</th>
-			      <th>Actions</th>
-			      
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr class="text-white" th:each="o: ${offices}" >
-					<td th:text="${o.officeCode}"></td>
-					<td th:text="${o.country}"></td>
-					<td th:text="${o.state}"></td>
-					<td th:text="${o.city}"></td>
-					<td th:text="${o.territory}"></td>
-					<td th:text="${o.postalCode}"></td>
-					<td th:text="${o.phone}"></td>
-					<td th:text="${o.addressLine1}"></td>
-					<td th:text="${o.addressLine2}"></td>
-					<td> 
-						<a th:href="@{/office/edit/}+${o.officeCode}" class="btn btn-success">Edit</a>
-						<a th:href="@{/office/delete/}+${o.officeCode}" class="btn btn-danger">Delete</a>
-					 </td>
-				</tr>
-			  </tbody>
+							    <tr>
+				
+							      <th>Codigo Oficina</th>
+							      <th>Pais</th>
+							      <th>Estado</th>
+							      <th>Ciudad</th>
+							      <th>Territorio</th>
+							      <th>Codigo Postal</th>
+							      <th>Telefono</th>
+							      <th>Dirección 1</th>
+							      <th>Dirección 2</th>
+							      <th>Estado </th>
+							      <!-- <th>Acciones</th> -->
+				
+							      
+							    </tr>
+							  </thead>
+							  <tbody>
+				
+							    <tr class="text-black" th:each="o: ${offices}" >
+									<td th:text="${o.officeCode}"></td>
+									<td th:text="${o.country}"></td>
+									<td th:text="${o.state}"></td>
+									<td th:text="${o.city}"></td>
+									<td th:text="${o.territory}"></td>
+									<td th:text="${o.postalCode}"></td>
+									<td th:text="${o.phone}"></td>
+									<td th:text="${o.addressLine1}"></td>
+									<td th:text="${o.addressLine2}"></td>
+				
+									<td th:text="${o.status}"> </td>
+									<!-- <td> 
+				
+										<a th:href="@{/office/edit/}+${o.officeCode}" class="btn btn-success">Edit</a>
+										<a th:href="@{/office/delete/}+${o.officeCode}" class="btn btn-danger">Delete</a>
+									 </td> -->
+								</tr>
+							  </tbody>
 			</table>
         </div>
         </div>
+
+        
         </section>
          <aside th:replace="/layouts/publicidad :: aside"> </aside>
         </div>

@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.TPFinal.model;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,7 +23,7 @@ public class ProductLine {
 	@Id
 	@NotNull(message = "La linea de producto no puede ser nulo")
 	@Column(name = "productline")
-	private String productLine; //tamaño 50
+	private String productLine; 
 	
 	@Size(max = 4000, message="La descripcion se pasa de los 4000 caracteres permitidos.")
 	@Column(name = "textDescription", length=4000, nullable=true)
@@ -31,10 +31,11 @@ public class ProductLine {
 	
 	@Size(max = 200, message="La direccion se pasa de los 200 caracteres permitidos.")
 	@Column(name = "htmlDescription", length=200, nullable=true)
-	private String htmlDescription; //Preguntar con respecto a MEDIUMTEXT
+	private String htmlDescription; 
 	
-	@Column(name = "image")
-	private Blob image;  //Averiguar 
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB", name = "image")
+	private String image;   
 	
 	@Column(name = "status")
 	private String status;
@@ -48,7 +49,6 @@ public class ProductLine {
 	}
 	
 
-	
 
 	/**
 	 * @param productLine
@@ -60,15 +60,14 @@ public class ProductLine {
 	public ProductLine(@NotNull(message = "La linea de producto no puede ser nulo") String productLine,
 			@Size(max = 4000, message = "La descripcion se pasa de los 4000 caracteres permitidos.") String textDescription,
 			@Size(max = 200, message = "La direccion se pasa de los 200 caracteres permitidos.") String htmlDescription,
-			Blob image, String status) {
-		
+			String image, String status) {
+		super();
 		this.productLine = productLine;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 		this.status = status;
 	}
-
 
 
 
@@ -118,23 +117,26 @@ public class ProductLine {
 	public void setHtmlDescription(String htmlDescription) {
 		this.htmlDescription = htmlDescription;
 	}
+
 	
 	/**
 	 * @return the image
 	 */
-	public Blob getImage() {
+	public String getImage() {
 		return image;
 	}
+
+
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
 
-	
+
 	/**
 	 * @return the products
 	 */
@@ -167,12 +169,16 @@ public class ProductLine {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "ProductLine [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
-				+ htmlDescription + ", image=" + image + ", status=" + status + "]";
+				+ htmlDescription + ", image=" + image + ", status=" + status + ", products=" + products + "]";
 	}
 
+
+
+	
 
 		
 }
