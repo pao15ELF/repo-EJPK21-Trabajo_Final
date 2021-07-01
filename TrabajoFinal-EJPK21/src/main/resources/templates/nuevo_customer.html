@@ -17,7 +17,7 @@
 			<div class="col-sm-10 col-md">
 				<!-- Formulario -->
 
-				<h1 class="text-center">Cargar de datos del cliente (Empresa)</h1>
+				<h1 class="text-center">Cargar datos del cliente (Empresa)</h1>
 				<hr>
 				<form action="/customer/guardar" th:object="${customer}" method="post">
 					<!-- Id del cliente oculto -->
@@ -25,7 +25,7 @@
 
 					<!-- Nombre y apellido -->
 					<div class="form-group">
-						<label for="customerName">Nombre</label> 
+						<label for="customerName">Nombre Completo</label> 
 						<input type="text" class="form-control" id="customerName" th:field="*{customerName}"
 							placeholder="Ingrese nombre del cliente ó Empresa">
 					</div>
@@ -35,7 +35,7 @@
 
 					<!--  Customer Last Name -->
 					<div class="form-group">
-						<label for="contactLastName">Apellido del Contratador</label> <input
+						<label for="contactLastName">Apellido</label> <input
 							type="text" class="form-control" id="contactLastName"
 							th:field="*{contactLastName}" placeholder="Ingrese Apellido">
 					</div>
@@ -45,7 +45,7 @@
 
 					<!--  Customer First Name -->
 					<div class="form-group">
-						<label for="contactFirstName">Nombre del Contratador</label> <input
+						<label for="contactFirstName">Nombre</label> <input
 							type="text" class="form-control" id="contactFirstName"
 							th:field="*{contactFirstName}" placeholder="Ingrese Nombre/s">
 					</div>
@@ -167,7 +167,6 @@
 			          </div>
 
 					<!-- Fin Estado del cliente -->
-					<br>
 					<hr>
 					<button type="submit" class="btn btn-primary">Enviar</button>
 				</form>

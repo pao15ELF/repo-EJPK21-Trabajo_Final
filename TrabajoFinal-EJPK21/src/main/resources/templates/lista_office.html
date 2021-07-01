@@ -11,18 +11,17 @@
 	<div class="container-fluid">
 		<div class="row">
 			<section class="col-md-10">
-
-				<h3> BUSQUEDA DE OFICINAS</h3>
 					<form th:action="@{/office/buscar}" th:object="${officeAux}" method="post">	
-						<div class="form-group">
+						<div class="form-group col-sm-3">
+						<h3> Busqueda de Oficinas</h3>
 							<label for="codOffice">Nombre de la Oficina</label>
 							<input type="text" class="form-control" id="codOffice" th:field="*{officeCode}" placeholder="Ingrese nombre(codigo) de la oficina">
-						</div>
 						<div class="form-text text-danger col-sm-10 " th:if="${mensaje}" th:text="${mensaje}"></div>
-						
+						<br>
 						<button type="submit" class="btn btn-primary">Buscar</button>
+						</div>
+						
 					</form>	
-				<br>
 				<br>
 
 				<h3 class="text-center"> Listado de Oficinas</h3>
