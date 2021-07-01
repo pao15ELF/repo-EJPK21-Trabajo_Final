@@ -10,104 +10,97 @@
 </head>
 <body>
 	<header th:replace="/layouts/header :: header"> </header>
-	<!-- Container -->	
-	<div class="container"> 
-		<div class="row col-sm-12 col-md"> 
+	<!-- Container -->
+	<div class="container">
+		<div class="row col-sm-12 col-md">
 			<div class="col-sm-10 col-md">
-		   	<!-- Formulario -->
-		   		<h1 class="text-center text-danger">Nuevo Empleado</h1>
+				<!-- Formulario -->
+				<h3 class="text-center">Nuevo Empleado</h3>
 				<hr>
-		   		<form th:action="@{/employee/guardar}" th:object="${employee}" method="post" > 
-        
-		  			<input type="hidden" th:field="*{employeeNumber}" />
-		        	
-		          	<div class="form-text text-danger col-sm-10 offset-1">
-		            	<label for="lastName" class="form-label">Apellido</label>
-		            	<input th:field="*{lastName}" type="text" class="form-control" id="lastName" />
-		          	</div>
-		          	<div class="form-text text-danger col-sm-10 offset-1"
-								th:if="${#fields.hasErrors('lastName')}"
-								th:errors="*{lastName}"></div>
-          	
-		          	<div class="form-text text-danger col-sm-10 offset-1">
-		            	<label for="firstName" class="form-label">Nombre Completo</label>
-		            	<input th:field="*{firstName}" type="text" class="form-control" id="firstName" />
-		          	</div>
-		          	<div class="form-text text-danger col-sm-10 offset-1"
-								th:if="${#fields.hasErrors('firstName')}"
-								th:errors="*{firstName}"></div>
-          	
-		          	<div class="form-text text-danger col-sm-10 offset-1">
-		           		<label for="extension" class="form-label">Extension</label>
-		            	<input th:field="*{extension}" type="text" class="form-control" id="extension" />
-		          	</div>
-		          	<div class="form-text text-danger col-sm-10 offset-1"
-								th:if="${#fields.hasErrors('extension')}"
-								th:errors="*{extension}"></div>
-          	
-		          	<div class="form-text text-danger col-sm-10 offset-1">
-		            	<label for="email" class="form-label">Email</label>
-		            	<input th:field="*{email}" type="email" class="form-control" id="email" placeholder="unjuusuario@gmail.com"/>
-		            
-		          	</div>
-		          	<div class="form-text text-danger col-sm-10 offset-1"
-								th:if="${#fields.hasErrors('email')}"
-								th:errors="*{email}"></div>
-          
-			          <div class="form-text text-danger col-sm-10 offset-1">
-			            <label  for="officeCode" class="form-label">Edificio al que pertenece</label>
-			            <select th:field="*{officeCode}" name="officeCode" id="officeCode" class="form-control">
-							<option th:each="o: ${offices}" 
-									th:value="${o.officeCode}"
-									th:text="${o.officeCode}" >
-							</option>
-											  
+				<form th:action="@{/employee/guardar}" th:object="${employee}"
+					method="post">
+
+					<input type="hidden" th:field="*{employeeNumber}" />
+
+					<div class="form-group">
+						<label for="lastName" class="form-label">Apellido</label> <input
+							th:field="*{lastName}" type="text" class="form-control"
+							id="lastName" />
+					</div>
+					<div class="form-group text-danger"
+						th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+
+					<div class="form-group">
+						<label for="firstName" class="form-label">Nombre Completo</label>
+						<input th:field="*{firstName}" type="text" class="form-control"
+							id="firstName" />
+					</div>
+					<div class="form-group text-danger"
+						th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+
+					<div class="form-group">
+						<label for="extension" class="form-label">Extension</label> <input
+							th:field="*{extension}" type="text" class="form-control"
+							id="extension" />
+					</div>
+					<div class="form-group text-danger"
+						th:if="${#fields.hasErrors('extension')}" th:errors="*{extension}"></div>
+
+					<div class="form-group">
+						<label for="email" class="form-label">Email</label> <input
+							th:field="*{email}" type="email" class="form-control" id="email"
+							placeholder="unjuusuario@gmail.com" />
+
+					</div>
+					<div class="form-group text-danger"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+					<div class="form-group">
+						<label for="officeCode" class="form-label">Edificio al que
+							pertenece</label> <select th:field="*{officeCode}" name="officeCode"
+							id="officeCode" class="form-control">
+							<option th:each="o: ${offices}" th:value="${o.officeCode}"
+								th:text="${o.officeCode}"></option>
+
 						</select>
-			          </div>
-			          <div class="form-text text-danger col-sm-10 offset-1"
-									th:if="${#fields.hasErrors('officeCode.officeCode')}"
-									th:errors="*{officeCode.officeCode}"></div>
-			          
-			          <div class="form-text text-danger col-sm-10 offset-1">
-			            <label for="employee" class="form-label">Reporta a:</label>
-			          	 
-			          	 <select th:field="*{reportsTo}" name="employeeNumber" id="employeeNumber" class="form-control">
-			          	 	<option value="0" >Ninguno</option>
-							<option th:each="e: ${employees}" 
-									th:value="${e.employeeNumber}" 
-									th:text="${e.lastName} +', '+ ${e.firstName}"> 
-							</option>
-											  
+					</div>
+					<div class="form-group"
+						th:if="${#fields.hasErrors('officeCode.officeCode')}"
+						th:errors="*{officeCode.officeCode}"></div>
+
+					<div class="form-group">
+						<label for="employee" class="form-label">Reporta a:</label> <select
+							th:field="*{reportsTo}" name="employeeNumber" id="employeeNumber"
+							class="form-control">
+							<option value="0">Ninguno</option>
+							<option th:each="e: ${employees}" th:value="${e.employeeNumber}"
+								th:text="${e.lastName} +', '+ ${e.firstName}"></option>
+
 						</select>
-			          </div>
-               
-			          <div class="form-text text-danger col-sm-10 offset-1">
-			            <label for="jobTitle" class="form-label">Trabajo</label>
-			            <input th:field="*{jobTitle}" type="text" class="form-control" id="jobTitle" />
-			          </div>
-			          <div class="form-text text-danger col-sm-10 offset-1"
-									th:if="${#fields.hasErrors('jobTitle')}"
-									th:errors="*{jobTitle}"></div>
-			          <br>
-			          <hr>
-			          <br>
-			          <div class="col-sm-10 offset-2">
-			            <button type="submit" class="btn mt-2 btn-primary">
-			              Guardar Empleado
-			            </button>
-	          		 </div>
-        	</form>
-		   	<!-- Fin Formulario -->
-		    </div>
-		    <aside th:replace="/layouts/publicidad :: aside"> </aside>
+					</div>
+
+					<div class="form-group">
+						<label for="jobTitle" class="form-label">Trabajo</label> <input
+							th:field="*{jobTitle}" type="text" class="form-control"
+							id="jobTitle" />
+					</div>
+					<div class="form-group text-danger"
+						th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></div>
+					<hr>
+					<button type="submit" class="btn btn-primary">Guardar
+						Empleado</button>
+				</form>
+				<!-- Fin Formulario -->
+			</div>
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
 		</div>
 	</div>
-   <footer th:replace="/layouts/footer :: footer"> </footer>
+	<footer th:replace="/layouts/footer :: footer"> </footer>
 	<script type="text/javascript"
 		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
 	<script type="text/javascript"
 		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
 	<script type="text/javascript"
 		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
-	</body>
+</body>
 </html>
