@@ -95,7 +95,7 @@ public class OrderController {
 				+ "un objeto vacio, de lo contrario redirecciona a la misma pagina pero con los datos");
 		
 		ModelAndView mav = new ModelAndView("nuevo_orderDetail");
-		orderDetails.add(unOrderDetail);
+		//orderDetails.add(unOrderDetail);
 		short stockProd=0,cantidadOrdenada=0;
 		String mensajeControl="";
 		if (resultadoValidacion.hasErrors()) {
@@ -103,35 +103,36 @@ public class OrderController {
 			mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
 			
 		}else {
-			//control de stock
-			controlProd = productService.buscarProductPorId(unOrderDetail.getOrderDetailId().getProductCode().getProductCode());
-			cantidadOrdenada=(short)unOrderDetail.getQuantityOrdered();			
-			stockProd= controlProd.getQuantityInStock();
-			if (stockProd<=0) {
-				mensajeControl="No hay stock para el producto solicitado";
-				mav.addObject("mensajeControl", mensajeControl);
-				mav.addObject("orderDetail", unOrderDetail);
-				mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
-			}else {
-				if(cantidadOrdenada>stockProd) {
-					mensajeControl="La cantidad ordenada supera al stock del producto solicitado";
+			   orderDetails.add(unOrderDetail);
+				//control de stock
+				controlProd = productService.buscarProductPorId(unOrderDetail.getOrderDetailId().getProductCode().getProductCode());
+				cantidadOrdenada=(short)unOrderDetail.getQuantityOrdered();			
+				stockProd= controlProd.getQuantityInStock();
+				if (stockProd<=0) {
+					mensajeControl="No hay stock para el producto solicitado";
 					mav.addObject("mensajeControl", mensajeControl);
 					mav.addObject("orderDetail", unOrderDetail);
 					mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
 				}else {
-					modificarStock(cantidadOrdenada);
-					productosOrdenados.add(controlProd);
-					mav.addObject("orderDetail", orderDetail);
-					mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
-					controlProd = new Product();
+					if(cantidadOrdenada>stockProd) {
+						mensajeControl="La cantidad ordenada supera al stock del producto solicitado";
+						mav.addObject("mensajeControl", mensajeControl);
+						mav.addObject("orderDetail", unOrderDetail);
+						mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
+					}else {
+						modificarStock(cantidadOrdenada);
+						productosOrdenados.add(controlProd);
+						mav.addObject("orderDetail", orderDetail);
+						mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
+						controlProd = new Product();
+					}
 				}
-			}
 		}
 		return mav;
 	}
 	
 	@PostMapping("/order/nuevo")
-	public ModelAndView postNuevoOrderPage(@ModelAttribute("orderDetail") OrderDetail unOrderDetail) {
+	public ModelAndView postNuevoOrderPage(@Valid @ModelAttribute("orderDetail") OrderDetail unOrderDetail,BindingResult resultadoValidacion) {
 		LOGGER.info("CONTROLLER: OderController");
 		LOGGER.info("METHOD: postNuevoOrderPage()");
 		LOGGER.info("RESULT: controla que el ultimo dato cargado este bien cargado sino "
@@ -139,33 +140,41 @@ public class OrderController {
 				+ "redirecciona nuevamente a nuevo_order.html");
 		
 		ModelAndView mav;
-		orderDetails.add(unOrderDetail);
-		short stockProd=0,cantidadOrdenada=0;
-		String mensajeControl="";
-		controlProd = productService.buscarProductPorId(unOrderDetail.getOrderDetailId().getProductCode().getProductCode());
-		cantidadOrdenada = (short) unOrderDetail.getQuantityOrdered();
-		stockProd=controlProd.getQuantityInStock();
-		if (stockProd<=0) {
+		if (resultadoValidacion.hasErrors()) {
 			mav = new ModelAndView("nuevo_orderDetail");
-			mensajeControl="No hay stock para el producto solicitado";
 			mav.addObject("orderDetail", unOrderDetail);
-			mav.addObject("products",productService.obtenerListaProductsPorEstadoActivo());
-			mav.addObject("mensajeControl", mensajeControl);
+			mav.addObject("products", productService.obtenerListaProductsPorEstadoActivo());
+			
 		}else {
-			if(cantidadOrdenada>stockProd) {
-				mav = new ModelAndView("nuevo_orderDetail");
-				mensajeControl="La cantidad ordenada supera al stock del producto solicitado";
-				mav.addObject("orderDetail", unOrderDetail);
-				mav.addObject("products",productService.obtenerListaProductsPorEstadoActivo());
-				mav.addObject("mensajeControl", mensajeControl);
-			}else {
-				modificarStock(cantidadOrdenada);
-				productosOrdenados.add(controlProd); 
-				mav = new ModelAndView("nuevo_order");
-				mav.addObject("order", order);
-				mav.addObject("customers", customerService.listaCustomers());
-				controlProd = new Product();
-			}
+			orderDetails.add(unOrderDetail);
+			short stockProd=0,cantidadOrdenada=0;
+			String mensajeControl="";
+			controlProd = productService.buscarProductPorId(unOrderDetail.getOrderDetailId().getProductCode().getProductCode());
+			cantidadOrdenada = (short) unOrderDetail.getQuantityOrdered();
+			stockProd=controlProd.getQuantityInStock();
+			
+				if (stockProd<=0) {
+					mav = new ModelAndView("nuevo_orderDetail");
+					mensajeControl="No hay stock para el producto solicitado";
+					mav.addObject("orderDetail", unOrderDetail);
+					mav.addObject("products",productService.obtenerListaProductsPorEstadoActivo());
+					mav.addObject("mensajeControl", mensajeControl);
+				}else {
+					if(cantidadOrdenada>stockProd) {
+						mav = new ModelAndView("nuevo_orderDetail");
+						mensajeControl="La cantidad ordenada supera al stock del producto solicitado";
+						mav.addObject("orderDetail", unOrderDetail);
+						mav.addObject("products",productService.obtenerListaProductsPorEstadoActivo());
+						mav.addObject("mensajeControl", mensajeControl);
+					}else {
+						modificarStock(cantidadOrdenada);
+						productosOrdenados.add(controlProd); 
+						mav = new ModelAndView("nuevo_order");
+						mav.addObject("order", order);
+						mav.addObject("customers", customerService.listaCustomers());
+						controlProd = new Product();
+					}
+				}
 		}
 		return mav;
 	}
@@ -177,7 +186,7 @@ public class OrderController {
 		LOGGER.info("RESULT: calcula el monto total de la compra de todos los productos y redirecciona a nuevo_payment.html");
 		
 		ModelAndView mav;
-		//int stock=0,cantidadOrdenada=0;
+		int stock=0,cantidadOrdenada=0;
 		//calculo auxiliar de monto total de la compra
 		if (resultadoValidacion.hasErrors()) {
 			mav = new ModelAndView("nuevo_order");
@@ -188,18 +197,19 @@ public class OrderController {
 			//controlar stock
 			for(OrderDetail o: orderDetails) {
 				OrderDetailId oId = new OrderDetailId();
-				oId.setProductCode(o.getOrderDetailId().getProductCode());				
-				//cantidadOrdenada = (short) o.getQuantityOrdered();
-				//stock = productoE.getQuantityInStock()-cantidadOrdenada;
-				//productoE.setQuantityInStock((short)stock);
-				productService.guardarProduct(o.getOrderDetailId().getProductCode());
+				oId.setProductCode(o.getOrderDetailId().getProductCode());	
+				Product productoE = productService.buscarProductPorId(o.getOrderDetailId().getProductCode().getProductCode());
+				cantidadOrdenada = (short) o.getQuantityOrdered();
+				stock = productoE.getQuantityInStock()-cantidadOrdenada;
+				productoE.setQuantityInStock((short)stock);
+				productService.guardarProduct(productoE);
 				oId.setOrderNumber(unOrder);
 				o.setOrderDetailId(oId);
 				orderDetailService.guardarOrderDetail(o);
 				total=total+(o.getPriceEach()*o.getQuantityOrdered());
 				oId=null;
+				productoE=null;
 			}
-			LOGGER.info("cliente1 "+unOrder.getCustomerNumber().getCustomerNumber());
 			customer1 = customerService.buscarCustomerPorId(unOrder.getCustomerNumber().getCustomerNumber());
 			mav = new ModelAndView("nuevo_payment");			
 			mav.addObject("payment", payment);

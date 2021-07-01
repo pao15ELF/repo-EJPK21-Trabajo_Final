@@ -29,6 +29,11 @@ public class ProductLineController {
 	
 	@GetMapping("/productLine/nuevo")
 	public ModelAndView getProductLinePage() {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: getProductLinePage()");
+		LOGGER.info("RESULT: visualiza la pagina nuevo_productLine.hmtl, enviando una bandera en verdadero"
+				+ "para que entre al formulario de cargar nuevo producto y un objeto de tipo productLine vacio");
+		
 		ModelAndView mav = new ModelAndView("nuevo_productLine");
 		mav.addObject("productLine", productLine );
 		mav.addObject("bandera", true);
@@ -38,6 +43,11 @@ public class ProductLineController {
 	
 	@PostMapping("/productLine/guardar")
 	public ModelAndView postGuardarProductLinepagePrueba(@ModelAttribute("productLine") ProductLine unProductLine,@RequestParam("file")MultipartFile file) {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: postGuardarProductLinepagePrueba()");
+		LOGGER.info("RESULT:controla que los datos esten correctamente cargados ,si es correcto guarda el objeto y redirige a la pagina resultado_productine.html"
+				+ "de lo contrario redirecciona a la pagina nuevo_productLine.html");
+		
 		ModelAndView mav;
 		//buscar si el id del product line ya se encuentra registrado
 		ProductLine encontrado= productLineService.buscarProductLinePorId(unProductLine.getProductLine());
@@ -59,6 +69,11 @@ public class ProductLineController {
 	
 	@PostMapping("/productLine/guardar/modificar")
 	public ModelAndView postGuardarProductLinepage2(@ModelAttribute("productLine") ProductLine unProductLine, BindingResult resultadoValidacion ,@RequestParam("file")MultipartFile file) {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: postGuardarProductLinepage2()");
+		LOGGER.info("RESULT:controla que los datos esten correctamente cargados ,si es correcto guarda el objeto y redirige a la pagina resultado_productine.html"
+				+ "de lo contrario redirecciona a la pagina nuevo_productLine.html");
+		
 		ModelAndView mav;		
 		if (resultadoValidacion.hasErrors()) {
 			mav = new ModelAndView("nuevo_productLine");
@@ -76,6 +91,10 @@ public class ProductLineController {
 	
 	@GetMapping("/productLine/lista")
 	public ModelAndView getMostrarProductLinesPage() {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: getMostrarProductLinesPage()");
+		LOGGER.info("RESULT: muestra la lista de productos en lista_productLine.html");
+		
 		ModelAndView mav = new ModelAndView("lista_productLine");
 		mav.addObject("productLines", productLineService.obtenerListaProductLines());
 		return mav;
@@ -83,9 +102,13 @@ public class ProductLineController {
 	
 	@GetMapping("/productLine/eliminar/{productLine}")
 	public ModelAndView getEliminarProductLinePage(@PathVariable(value="productLine") String id) {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: getEliminarProductLinePage()");
+		LOGGER.info("RESULT: Coloca a la linea de producto FUERA DE LINEA y muestra la lista lista_productLine.html");
+		
 		ProductLine encontrado = productLineService.buscarProductLinePorId(id);
 		encontrado.setStatus("FUERA DE LINEA");
-		//productLineService.guardarProductLine(encontrado);
+		productLineService.guardarProductLine(encontrado);
 		ModelAndView mav = new ModelAndView("lista_productLine");
 		mav.addObject("productLines", productLineService.obtenerListaProductLines());
 		return mav;
@@ -93,6 +116,10 @@ public class ProductLineController {
 	
 	@GetMapping("/productLine/modificar/{productLine}")
 	public ModelAndView getModificarProductLinePage(@PathVariable(value="productLine") String id) {
+		LOGGER.info("CONTROLLER: ProductlineController");
+		LOGGER.info("METHOD: getModificarProductLinePage()");
+		LOGGER.info("RESULT: Muestra la pagina nuevo_productline.html para modificar una linea de producto");
+		
 		ProductLine encontrado = productLineService.buscarProductLinePorId(id);
 		ModelAndView mav = new ModelAndView("nuevo_productLine");
 		mav.addObject("productLine", encontrado);

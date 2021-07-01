@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -46,7 +47,8 @@ public class Product {
 	@Column(name = "productDescription", length=100, nullable=false)
 	private String productDescription; // text en la base
 	
-	@Min(value=0, message="EL minimo del producto en Stock debe ser mayor a 0")
+	@Min(value=0, message="EL minimo del producto en Stock no puede ser menor a 1 ")
+	@Max(value=9999,message="EL maximo de producto en Stock no puede ser mayor a 9999")
 	@Column(name = "quantityInStock", nullable=false)
 	private short quantityInStock; // (por Smalint en mysql)
 	
@@ -58,7 +60,7 @@ public class Product {
 	@Column(name = "MSRP", nullable=false)
 	private double MSRP; //precio de venta sugerido por el fabricante(bigDecimal)
 	
-	@Column(name = "status")
+	@Column(name = "status", nullable=true)
 	private String status;
 	
 	public Product()

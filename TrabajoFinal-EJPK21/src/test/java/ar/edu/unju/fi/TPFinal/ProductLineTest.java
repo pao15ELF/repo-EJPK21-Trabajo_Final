@@ -22,14 +22,18 @@ class ProductLineTest {
 	@Autowired
 	private IProductService productService;
 	
-	//@Test
+	@Test
 	void cargarProductLine() {
-		//al cargar imagenes ya no se relizan los tests de ProductLine
-		ProductLine marca1 = new ProductLine("SRN-01","La Serenisima",null,null,null);
+		
+		ProductLine marca1 = new ProductLine("SRN-01","La Serenisima","www.laserenisima.com/",null,null);
 		productLineService.guardarProductLine(marca1);
 		ProductLine encontrado = productLineService.buscarProductLinePorId("SRN-01");
-		ProductLine marca2 = new ProductLine("ARC-01","Arcor",null,null,null);
+		
+		ProductLine marca2 = new ProductLine("ARC-02","Arcor","www.arcor.com.ar",null,null);
 		productLineService.guardarProductLine(marca2);
+		
+		ProductLine marca3 = new ProductLine("ALA-03","Ala","www.ala.com.ar",null,null);
+		productLineService.guardarProductLine(marca3);
 		
 		assertEquals(marca1.getProductLine(), encontrado.getProductLine());
 	}

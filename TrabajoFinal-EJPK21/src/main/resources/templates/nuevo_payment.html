@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Formulario Nuevo Payment</title>
+<title>Formulario Nuevo Pago</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 </head>
@@ -44,25 +44,14 @@
 					<!-- Amount-->
 					<div class="form-group">
 						<label>Total a pagar</label> 
-						<h1 th:type="number" class="form-control" th:text="${payment.total}"> </h1>
+						<h1 th:type="number" class="form-control" th:text="${total}"> </h1>
 					</div>
-					
-					<!--  <div class="form-text text-danger col-sm-10 offset-2"
-						th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div> -->
 
 					<!-- Fin Check Number -->
 
 					<!-- customer-->
 					<div class="form-group ">
 						<label>Cliente</label> 
-						<!-- <select th:field="*{paymentId.customersNumber.customerNumber}"
-							class="form-control">
-							<option th:each="c : ${customer}"
-								th:value="${c.customerNumber}"
-								th:text="${c.customerNumber} + ' - ' + ${c.customerName} "
-								th:selected="false"></option>
-
-						</select> -->
 						<h1 th:type="text" class="form-control" th:text="${customer.customerName}"></h1>
 					</div>
 					<!-- Fin customer -->

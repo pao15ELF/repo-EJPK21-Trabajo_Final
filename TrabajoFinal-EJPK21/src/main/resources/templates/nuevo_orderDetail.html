@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Formulario Nueva Order Detail</title>
+<title>Formulario Nuevo Detalles de pedido</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 </head>
@@ -24,6 +24,7 @@
 					<div class="form-group ">
 						<label>Producto</label> 
 						<select th:field="*{orderDetailId.productCode}" class="form-control">
+							<option value="0">SELECCIONAR</option>
 							<option th:each="p : ${products}"
 								th:value="${p.productCode}"
 								th:text="${p.productName}"
@@ -66,9 +67,11 @@
 						th:errors="*{orderLineNumber}"></div>
 
 					<!-- Order Line Number -->
-
-					<button type="submit" class="btn btn-primary">Cargar Otro Producto</button>
-					<button onclick="location.href='/order/nuevo'" class="btn btn-success" type="button">Terminar Pedido</button>
+					<br> <br>
+					<button type="submit" class="btn btn-primary" value="siguiente" >Cargar Otro Producto</button>
+					
+					<button type="submit" class="btn btn-primary" value="terminar" formaction="/order/nuevo">Terminar Pedido</button>
+					<!-- <button onclick="location.href='/order/nuevo'" class="btn btn-success" type="button">Terminar Pedido</button> -->
 				</form>
 				<br>
 				<br>

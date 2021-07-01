@@ -173,7 +173,7 @@ public class ProductLine {
 	@Override
 	public String toString() {
 		return "ProductLine [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
-				+ htmlDescription + ", image=" + image + ", status=" + status + ", products=" + products + "]";
+				+ htmlDescription + ", image=" + image + ", status=" + status +"]";
 	}
 
 
