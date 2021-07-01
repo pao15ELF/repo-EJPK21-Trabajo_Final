@@ -1,55 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Offices</title>
-		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
-	</head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Offices</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
+</head>
 <body>
 	<header th:replace="/layouts/header :: header"> </header>
 	<div class="container-fluid">
 		<div class="row">
 			<section class="col-md-10">
-					<form th:action="@{/office/buscar}" th:object="${officeAux}" method="post">	
-						<div class="form-group col-sm-3">
-						<h3> Busqueda de Oficinas</h3>
-							<label for="codOffice">Nombre de la Oficina</label>
-							<input type="text" class="form-control" id="codOffice" th:field="*{officeCode}" placeholder="Ingrese nombre(codigo) de la oficina">
-						<div class="form-text text-danger col-sm-10 " th:if="${mensaje}" th:text="${mensaje}"></div>
-						<br>
-						<button type="submit" class="btn btn-primary">Buscar</button>
-						</div>
-						
-					</form>	
-				<br>
 
-				<h3 class="text-center"> Listado de Oficinas</h3>
+				<h3 class="text-center">Listado de Oficinas</h3>
 				<hr>
 				<div class="text-center">
 					<div class="table-responsive">
 						<table class="table">
-							<thead class="thead-dark"> 
-							    <tr>
-				
-							      <th>Codigo Oficina</th>
-							      <th>Pais</th>
-							      <th>Estado</th>
-							      <th>Ciudad</th>
-							      <th>Territorio</th>
-							      <th>Codigo Postal</th>
-							      <th>Telefono</th>
-							      <th>Dirección 1</th>
-							      <th>Dirección 2</th>
-							      <th>Estado </th>
-							      <!-- <th>Acciones</th> -->
-				
-							      
-							    </tr>
-							  </thead>
-							  <tbody>
-				
-							    <tr class="text-black" th:each="o: ${offices}" >
+							<thead class="thead-dark">
+								<tr>
+
+									<th>Codigo Oficina</th>
+									<th>Pais</th>
+									<th>Estado</th>
+									<th>Ciudad</th>
+									<th>Territorio</th>
+									<th>Codigo Postal</th>
+									<th>Telefono</th>
+									<th>Dirección 1</th>
+									<th>Dirección 2</th>
+									<th>Estado</th>
+									<!-- <th>Acciones</th> -->
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr class="text-black" th:each="o: ${offices}">
 									<td th:text="${o.officeCode}"></td>
 									<td th:text="${o.country}"></td>
 									<td th:text="${o.state}"></td>
@@ -59,34 +48,51 @@
 									<td th:text="${o.phone}"></td>
 									<td th:text="${o.addressLine1}"></td>
 									<td th:text="${o.addressLine2}"></td>
-				
-									<td th:text="${o.status}"> </td>
+
+									<td th:text="${o.status}"></td>
 									<!-- <td> 
 				
 										<a th:href="@{/office/edit/}+${o.officeCode}" class="btn btn-success">Edit</a>
 										<a th:href="@{/office/delete/}+${o.officeCode}" class="btn btn-danger">Delete</a>
 									 </td> -->
 								</tr>
-							  </tbody>
-			</table>
-        </div>
-        </div>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br>
+				<form th:action="@{/office/buscar}" th:object="${officeAux}"
+					method="post">
+					<div class="form-group col-sm-3">
+						<h3>Busqueda de Oficinas</h3>
+						<label for="codOffice">Nombre de la Oficina</label> <input
+							type="text" class="form-control" id="codOffice"
+							th:field="*{officeCode}"
+							placeholder="Ingrese nombre(codigo) de la oficina">
+						<div class="form-text text-danger col-sm-10 " th:if="${mensaje}"
+							th:text="${mensaje}"></div>
+						<br>
+						<button type="submit" class="btn btn-primary">Buscar</button>
+					</div>
 
-        
-        </section>
-         <aside th:replace="/layouts/publicidad :: aside"> </aside>
-        </div>
-        
+				</form>
+			</section>
+			<aside th:replace="/layouts/publicidad :: aside"></aside>
+		</div>
 
-         
-          
-     
-      </div>
-      <footer th:replace="/layouts/footer :: footer"> </footer>
-<script type="text/javascript" th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
-<script type="text/javascript" th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
-<script type="text/javascript" th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
-   
-    
-	</body>
+
+
+
+
+	</div>
+	<footer th:replace="/layouts/footer :: footer"> </footer>
+	<script type="text/javascript"
+		th:src=@{/webjars/jquery/3.5.1/jquery.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/popper.js/1.16.1-lts/popper.min.js}></script>
+	<script type="text/javascript"
+		th:src=@{/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js}></script>
+
+
+</body>
 </html>
