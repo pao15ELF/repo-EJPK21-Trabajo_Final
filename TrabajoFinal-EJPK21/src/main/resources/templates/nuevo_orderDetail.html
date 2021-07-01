@@ -24,7 +24,7 @@
 					<div class="form-group ">
 						<label>Producto</label> 
 						<select th:field="*{orderDetailId.productCode}" class="form-control">
-							<option value="0">SELECCIONAR</option>
+							<!-- <option value="0">SELECCIONAR</option> -->
 							<option th:each="p : ${products}"
 								th:value="${p.productCode}"
 								th:text="${p.productName}"

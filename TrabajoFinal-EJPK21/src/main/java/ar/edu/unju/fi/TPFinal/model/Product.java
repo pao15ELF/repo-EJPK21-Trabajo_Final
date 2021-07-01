@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class Product {
 	
 	@Id
-	@NotNull(message = "El codigo del producto no puede ser nulo. Ingrese un codigo")
+	@NotEmpty(message = "El codigo del producto no puede ser nulo. Ingrese un codigo")
 	@Column(name = "productCode")
 	private String productCode; //tamaño 15 PRINCIPAL
 	

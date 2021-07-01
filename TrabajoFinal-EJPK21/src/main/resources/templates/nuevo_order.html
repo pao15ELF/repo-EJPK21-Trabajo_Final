@@ -87,7 +87,7 @@
 					<div class="form-group ">
 						<label>Cliente</label> 
 						<select th:field="*{customerNumber}" class="form-control">
-							<option value="0">Seleccione </option>							
+							<!--  <option value="0">Seleccione </option> -->							
 							<option th:each="c : ${customers}" 
 									th:value="${c.customerNumber}"
 									th:text="${c.customerName} "

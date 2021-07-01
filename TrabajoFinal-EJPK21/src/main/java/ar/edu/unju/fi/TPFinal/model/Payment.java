@@ -7,6 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public class Payment {
 	
 	@EmbeddedId
 	@Autowired
+	@Valid
 	private PaymentId paymentId;
 	
 	@NotNull(message="Debe ingresar fecha de pago")

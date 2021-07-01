@@ -24,25 +24,32 @@
 	            		<label for="productLine" class="form-label">Linea de Producto (Identificador)</label>
 	            		<input th:field="*{productLine}" type="text" class="form-control" id="productLine" />
 	            		
+	            		<div class="form-text text-danger col-sm-10 offset-2"
+							th:if="${#fields.hasErrors('productLine')}"
+							th:errors="*{productLine}"></div>
+	          			
           			</div>
-          		
-	          		<div class="col-md-3">
+          			<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+          			
+          		    <div class="col-md-3">
 	            		<label for="textDescription" class="form-label">Descripción</label>
 	            		<input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" />
-	          		</div>
-	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+	          		
+	          			<div class="form-text text-danger col-sm-10 offset-2"
 							th:if="${#fields.hasErrors('textDescription')}"
-							th:errors="*{textDescription}"></div>-->
-          			<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+							th:errors="*{textDescription}"></div>
+	          		</div>
 	          		
 	          		<div class="col-md-3">
 	            		<label for="htmlDescription" class="form-label">Dirección HTML</label>
 	            		<input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" />
-	          		</div>
-	          		<!--  <div class="form-text text-danger col-sm-10 offset-2"
+	          		
+	          			<div class="form-text text-danger col-sm-10 offset-2"
 							th:if="${#fields.hasErrors('htmlDescription')}"
-							th:errors="*{htmlDescription}"></div>-->
-	          		<div class="form-text text-danger col-sm-10 " th:if="${mensajeError}" th:text="${mensajeError}"></div>
+							th:errors="*{htmlDescription}"></div>
+	          		</div>
+	          		
+						
 	          		<!-- estado de la marca -->
 			  
 			        <div class="col-md-3">
@@ -54,6 +61,7 @@
 							</select>	
 			        </div>
           			<!-- Fin estado de la marca -->
+          			
 	          		<div class="col-md-8 offset-md-2">
           			<br>
 	            		<div class="col-md-12 offset-md-3 ">
