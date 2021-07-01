@@ -91,7 +91,7 @@
           <div class="col-sm-10">
             <label  for="productLine" class="form-label">Linea de Producto</label>
             <select th:field="*{productLine.productLine}" name="productLine" id="productLine" class="form-control">
-				<option value="0">Seleccione </option>
+				<!--  <option value="0">Seleccione </option> -->
 				<option th:each="p: ${listaProductLine}" 
 						th:value="${p.productLine}" 
 						th:text="${p.productLine}" >

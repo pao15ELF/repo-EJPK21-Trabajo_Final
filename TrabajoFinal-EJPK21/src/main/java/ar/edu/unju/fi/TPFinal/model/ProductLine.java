@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class ProductLine {
 	
 	@Id
-	@NotNull(message = "La linea de producto no puede ser nulo")
+	@NotEmpty(message = "La linea de producto no puede estar vacio")
 	@Column(name = "productline")
 	private String productLine; 
 	

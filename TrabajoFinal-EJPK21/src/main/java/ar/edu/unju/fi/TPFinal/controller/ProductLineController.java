@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.TPFinal.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class ProductLineController {
 	
 	
 	@PostMapping("/productLine/guardar")
-	public ModelAndView postGuardarProductLinepagePrueba(@ModelAttribute("productLine") ProductLine unProductLine,@RequestParam("file")MultipartFile file) {
+	public ModelAndView postGuardarProductLinepagePrueba(@Valid @ModelAttribute("productLine") ProductLine unProductLine,BindingResult resultadoValidacion,@RequestParam("file")MultipartFile file) {
 		LOGGER.info("CONTROLLER: ProductlineController");
 		LOGGER.info("METHOD: postGuardarProductLinepagePrueba()");
 		LOGGER.info("RESULT:controla que los datos esten correctamente cargados ,si es correcto guarda el objeto y redirige a la pagina resultado_productine.html"
@@ -52,18 +54,24 @@ public class ProductLineController {
 		//buscar si el id del product line ya se encuentra registrado
 		ProductLine encontrado= productLineService.buscarProductLinePorId(unProductLine.getProductLine());
 		String mensajeError = "";
-		if (encontrado!=null) {
-			mensajeError = "La marca o linea de producto ya se encuentra cargada en la Base de Datos";
+		if(resultadoValidacion.hasErrors()) {
 			mav = new ModelAndView("nuevo_productLine");
-			mav.addObject("mensajeError", mensajeError);
 			mav.addObject("productLine", unProductLine);
 			mav.addObject("bandera", true);
+		}else {
+			if (encontrado!=null) {
+				mensajeError = "La marca o linea de producto ya se encuentra cargada en la Base de Datos";
+				mav = new ModelAndView("nuevo_productLine");
+				mav.addObject("mensajeError", mensajeError);
+				mav.addObject("productLine", unProductLine);
+				mav.addObject("bandera", true);
+			}
+			else {
+					productLineService.guardarProductLine(unProductLine,file);
+					mav = new ModelAndView("resultado_productLine");		
+			}
 		}
-		else {
-			
-				productLineService.guardarProductLine(unProductLine,file);
-				mav = new ModelAndView("resultado_productLine");		
-		}
+				
 		return mav;
 	}
 	
