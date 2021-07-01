@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Lista ProductLine</title>
+		<title>ProductLines</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 	</head>
 <body>
@@ -20,20 +20,22 @@
 		        	<table class="table">
 					  <thead class="thead-dark">
 					    <tr class="text-white">
+					          <th >Imagen</th>
 					      <th >Linea de Producto </th>
 					      <th >Descripción</th>
 					      <th >Html Direccion</th>
-					      <th >Imagen</th>
+					  
 					      <th >Estado</th>
 					      <th >Acciones </th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr th:each="p: ${productLines}" >
+							<td scope="row"><img alt="" th:src="*{'data:image/jpeg;base64,'+{p.image}}" style="width:100px;height:100px"></td>
 							<td th:text="${p.productLine}"></td>
 							<td th:text="${p.textDescription}"></td>
 							<td th:text="${p.htmlDescription}"></td>
-							<td th:text="${p.image}"></td>
+							
 							<td th:text="${p.status}"></td>
 							<td> 
 								<a th:href="@{/productLine/modificar/}+${p.productLine}" class="btn btn-success">Editar</a>

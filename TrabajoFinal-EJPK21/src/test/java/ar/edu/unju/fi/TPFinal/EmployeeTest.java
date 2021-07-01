@@ -36,13 +36,14 @@ class EmployeeTest {
 	@Test
 	void testCargarEmployee() {
 		
-		Office office = officeService.buscarOfficePorId("CTR");
+		Office office = officeService.buscarOfficePorId("Central");
+		Office office1 = officeService.buscarOfficePorId("Sucursal02");
 		
 		Employee employee1 = new Employee();
 		employee1.setEmail("jefe@gmail.com");
 		employee1.setExtension("x1");
-		employee1.setFirstName("principal");
-		employee1.setJobTitle("Economista");
+		employee1.setFirstName("Nicole");
+		employee1.setJobTitle("Jefe");
 		employee1.setLastName("Lopez");
 		employee1.setOfficeCode(office);
 		employee1.setReportsTo(null);
@@ -50,15 +51,26 @@ class EmployeeTest {
 		
 		
 		Employee encontrado = employeeService.buscarEmployeePorId(1);
+		
 		Employee employee2 = new Employee();
-		employee2.setEmail("ejemplo@gmail.com");
+		employee2.setEmail("empleado1@gmail.com");
 		employee2.setExtension("x900");
-		employee2.setFirstName("ejemplo1");
-		employee2.setJobTitle("contador");
-		employee2.setLastName("ejemplo1");
-		employee2.setOfficeCode(office);
+		employee2.setFirstName("Ramiro");
+		employee2.setJobTitle("Cajero");
+		employee2.setLastName("Plaza");
+		employee2.setOfficeCode(office1);
 		employee2.setReportsTo(encontrado);
 		employeeService.guardarEmployee(employee2);
+		
+		Employee employee3 = new Employee();
+		employee3.setEmail("empleado2@gmail.com");
+		employee3.setExtension("x901");
+		employee3.setFirstName("Dylan");
+		employee3.setJobTitle("Cajero");
+		employee3.setLastName("Llampa");
+		employee3.setOfficeCode(office1);
+		employee3.setReportsTo(encontrado);
+		employeeService.guardarEmployee(employee3);
 		
 		Employee emp = employeeService.buscarEmployeePorId(2);
 		

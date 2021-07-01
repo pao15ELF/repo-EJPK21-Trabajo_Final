@@ -4,56 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Clientes</title>
+<title>Exito!</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 </head>
 <body>
 	<header th:replace="/layouts/header :: header"> </header>
-	<!--  <div class="container-fluid">
-		<div class="row">
-			<section class="col-md-10">
-				<h3 class="text-center">Listado Payments</h3>
-				<hr>
-				<div class="text-center">
-					<div class="table-responsive">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th>Customer Number</th>
-									<th>Check Number</th>
-									<th>Payment Date</th>
-									<th>Amount</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="p:${payment}">
-
-									<td th:text="${p.paymentId.costumersNumber.costumerNumber}"></td>
-									
-									<td th:text="${p.paymentId.checkNumber}"></td>
-									<td th:text="${p.paymentDate}"></td>
-									<td th:text="${p.amount}"></td>
-
-									<!-- <td><a
-										th:href="@{/payment/modificar/}+${p.paymentId.checkNumber}"class="btn btn-warning">EDITAR</a> <br>
-									<br> <a
-										th:href="@{/payment/eliminar/}+${p.paymentId.checkNumber}"class="btn btn-danger">ELIMINAR</a></td> -->
-								<!--  </tr>
-								
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</section>
-			<aside th:replace="/layouts/publicidad :: aside"></aside>
-		</div>
-	</div> -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10"> 
-				<h3>SE HA GUARDADO CON EXITO</h3>
-				<a href="/orderDetail/nuevo">Realizar nuevo pedido.</a>
+				<h3>EL PAGO SE HA REALIZADO CON EXITO</h3>
+				<a href="/orderDetail/nuevo">Realizar nuevo pedido</a>
 			</div>
 			<aside th:replace="/layouts/publicidad :: aside"> </aside>
 		</div>

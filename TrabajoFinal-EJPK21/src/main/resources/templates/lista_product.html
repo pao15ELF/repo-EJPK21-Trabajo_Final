@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Lista Producto</title>
+		<title>Products</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}">
 	</head>
 <body>
@@ -50,6 +50,7 @@
 						<td th:text="${p.status}"></td>
 						<td> 
 							<a th:href="@{/product/modificar/}+${p.productCode}" class="btn btn-success">Editar</a>
+							
 							<a th:href="@{/product/eliminar/}+${p.productCode}" class="btn btn-danger">Inhabilitar</a>
 						</td>
 					</tr>
@@ -58,6 +59,7 @@
 	        </div>
 	        </div>
 	        </section>
+	        <aside th:replace="/layouts/publicidad :: aside"> </aside>
 	        </div>
 	     
 	      </div>
